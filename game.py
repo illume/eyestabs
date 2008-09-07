@@ -3,6 +3,15 @@
 An object representing a game... or game sequence.
 
 
+This is how each Game object is called.
+
+# the constructor calls the load() method too.
+g = Game()
+
+in loop:
+    g.handle_events(events)
+    g.update(elapsed_time_since_last_frame)
+    rects_dirtied = g.draw(screen)
 
 """
 
@@ -13,7 +22,7 @@ from pygame.locals import *
 class Game(object):
 
     
-    def __init__(self, going = True, games = None, name = ""):
+    def __init__(self, going = True, games = None, name = "", elapsed_time = 0.0):
         """ games - children game objects.
 	    going - if this is going.
 	"""
@@ -27,6 +36,8 @@ class Game(object):
 	self.games = games
 
 	self.name = name
+
+	self.elapsed_time = elapsed_time
 
 	self.load()
 
@@ -50,8 +61,13 @@ class Game(object):
             if g.going:
                 g.handle_events(events)
 
+    def stop(self):
+        self.going = False
+
 
     def update(self, elapsed_time):
+	self.elapsed_time += elapsed_time
+#	print self.games
 
 	for g in self.games:
             if g.going:

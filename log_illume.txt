@@ -1,0 +1,89 @@
+
+
+
+
+
+2008/09/07 18:58:04 AEST GMT +10
+
+
+Went down to the cafe, because I had no net access at home.
+
+Quickly had a chat to aka, and akalias.
+
+
+
+I think we decided to do a musical game of some sort.
+
+The theme is 'the length of a piece of string'.   
+
+Which kind of turns out to be better than 'punk' for our game idea.
+
+One where you can play your real life guitar, and have the pitch detected.
+
+
+
+
+
+
+
+2008/09/07 19:05:15 AEST GMT +10
+
+Tonight I want to make a basic prototype, and make some base code.
+
+- intro sequence
+    - show some background images, with text on them.
+    - play some music.
+    - fade between the various parts of text/images.
+
+- a selection screen.
+    - which can be used as either character, or level select.
+    - you select a part of the screen, and click to go onto that 'level'.
+
+- story board of game idea.
+
+
+
+
+2008/09/07 19:46:08 AEST GMT +10
+
+Wrote down some notes, about how things will work.  Using pen and paper, in my little notebook.
+
+
+- make note tapper interface.
+    - given a song, and some note positions, and a note.
+    - 
+
+
+2008/09/07 19:59:49 AEST GMT +10
+
+Got transitions from intro to top level thing.
+
+
+2008/09/07 20:33:16 AEST GMT +10
+
+
+Did some washing...
+
+- make note tapper interface.
+    - given a song, and some note positions, and a note.
+    - 
+
+
+Need to set up a test framework.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

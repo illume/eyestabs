@@ -1,4 +1,4 @@
-Your Game Title
+Eye stabs
 ===============
 
 Entry in PyWeek #7  <http://www.pyweek.org/7/>
