@@ -20,13 +20,62 @@ class NoteGuess(Game):
 
     def load(self):
         self.notes_to_press = []
-
+        
         # [[note, elapsed_time], ...]
 	self.notes_time = []
         
+	self.elapsed_time = 0.0
+        
+        
+        # total time allowed in the song.
+	self.total_time = 30.
+	
+
+
     def draw(self, screen):
         """
 	"""
+
+	"""
+		- from [[note,time], ...] 
+		- display notes across the screen.   
+		    - total time, eg 30.0 seconds - divided by screen width (640)
+			- draw a note at the pos, or an underline.
+
+		- display position of time.  As a line from top of screen to bottom.
+        """
+	rects = []
+
+	if self.notes_time:
+	    # the notes that people press.
+	    print self.notes_time
+
+
+
+
+	screen.fill((255, 255, 255,255))
+        
+        
+	# draw the representation of time.  
+	#     A line from top to bottom of screen, that moves.
+
+
+        time_line_x = self.elapsed_time * (screen.get_width() / self.total_time)
+	
+	pygame.draw.line(screen, 
+	                 (255,0,0,255), (time_line_x, 0), 
+	                 (time_line_x, screen.get_height()), 1)
+
+
+        #TODO: draw the position of notes time
+
+
+
+        # clear the notes that we've processed.
+	#self.notes_time = []
+
+        # update the whole screen.
+	rects.append( screen.get_rect() )
 	return rects
         
         
@@ -38,24 +87,21 @@ class NoteGuess(Game):
 
 	for e in events:
 	    if e.type == KEYDOWN:
+	        
 	        if e.unicode in NOTES: 
+		    print "HIIH!!"
 		    notes_pressed.append(e.unicode)
 
         self.notes_last_pressed = notes_pressed
 
 
-    def notes(self, notes_pressed):
-        self.notes_to_press.append( notes_pressed )
-
-
     def update_notes(self, elapsed_time):
         # translate the notes into [[note, elapsed_time], ]
         all_notes = []
-	for note_set in self.notes_to_press:
-	    for note in note_set:
-                all_notes.append( [note, elapsed_time] )
+	for note in self.notes_last_pressed:
+            all_notes.append( [note, elapsed_time] )
 
-        self.notes_to_press = []
+	self.notes_last_pressed = []
 
 	self.notes_time.extend(all_notes)
 

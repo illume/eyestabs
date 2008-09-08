@@ -16,6 +16,10 @@ from pygame.locals import *
 
 from game import Game
 from intro import Intro
+# The part where you guess what the notes are, by tapping on the keyboard.
+#    Or playing your guitar.
+from noteguess import NoteGuess
+
 
 
 class Top(Game):
@@ -46,13 +50,24 @@ class Top(Game):
 
 
     def check_transition(self):
-
+	""" See which part of the game we are at, and where we should go.
+	"""
+        
         # which part of the game are we going into?
 	if self.intro.going:
 	    self.intro.stop()
+	    self.note_guess.load()
+	    self.note_guess.start()
+	    self.note_guess.set_main()
+
+	elif self.note_guess.going:
+	    self.note_guess.stop()
 	else:
 	    print 'ok'
 	    self.stop()
+
+
+
 
 
     def draw(self, screen):
@@ -78,6 +93,8 @@ def main():
     fps = 30
     screen_size = (640,480)
 
+    #pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
+
     pygame.init()
     
     # start playing intro track, before the screen comes up.
@@ -94,10 +111,18 @@ def main():
     top = Top(name = "Eye stabs.  Do you?")
     top.set_main()
     
+    # Add the intro as a child Game to the top Game.
     intro = Intro(name ="eye stab intro")
     
     top.games.append(intro)
     top.intro = intro
+    
+    note_guess = NoteGuess(name="Eye stabs.    Note Guess")
+
+    # stop the note_guess part, because we are not ready yet.
+    note_guess.stop()
+    top.games.append(note_guess)
+    top.note_guess = note_guess
     
     
     
