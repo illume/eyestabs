@@ -68,7 +68,7 @@ def mode(start, which_mode):
 
 ################################################################################
 
-def main():
+def pitch_mapping():
     degree = math.pow(2, 1/12.0)
 
     e_scale = scale('E')
@@ -76,14 +76,24 @@ def main():
     start_frequency = 55 * math.pow(degree, 7)
     semitones = range(49)   # 4 Octaves,
 
-    for i in semitones:
-        note = e_scale[i%12]
-        frequency = start_frequency * math.pow(degree, i)
-        print frequency, note
+    return [
+        (
+            start_frequency * math.pow(degree, i),
+            e_scale[i%12] + str(i/12 + 1)
+        )
+        for i in semitones
+    ]
 
+def closest_note(mapping, search):
+    return min(mapping, key=lambda i: abs(search - i[0]))
+
+def main():
+    mapping = pitch_mapping()
+    print closest_note(mapping, 123)
+    
 ################################################################################
 
 if __name__ == '__main__':
     main()
-    
+
 ################################################################################
