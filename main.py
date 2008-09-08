@@ -84,7 +84,7 @@ def main():
     try:
         intro_track = os.path.join("data", "intro.ogg")
         pygame.mixer.music.load(intro_track)
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(-1)
     except:
         print "failed playing music track: '%s'" % intro_track
 
