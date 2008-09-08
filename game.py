@@ -63,6 +63,9 @@ class Game(object):
 
     def stop(self):
         self.going = False
+    def start(self):
+        self.going = True
+
 
 
     def update(self, elapsed_time):

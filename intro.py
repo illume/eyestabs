@@ -37,9 +37,8 @@ class Intro(Game):
             self.text_string = "Cool.  I like you then."
 
         elif self.elapsed_time >= 8.0 and self.elapsed_time < 20.0:
-            self.draw_lines = 1
             pass
-        elif self.elapsed_time >= 20.0 and self.elapsed_time < 800.0:
+        elif self.elapsed_time >= 10.0 and self.elapsed_time < 800.0:
             self.stop()
 
 
@@ -56,16 +55,29 @@ class Intro(Game):
 
         screen.fill((0,0,0,255))
 
-        x,y = screen.get_rect().center
+	# draw the text in the middle of the screen.
+        x,text_y = screen.get_rect().center
+        text_x = x - (the_text.get_width() / 2)
 
-        x = x - (the_text.get_width() / 2)
+        r = screen.blit(the_text, (text_x,text_y))
 
-        r = screen.blit(the_text, (x,y))
+
+
+	# how fast the notes move.  difference in x.
+	note_dxes = [5,8,10,3,6,12]
 
         if self.draw_lines:
-            for mult in range(5,30):
+	    # lines (guitar strings) go down the screen.
+	    #    Some notes move across each of the strings at different speeds.
+            
+            for mult, note_dx in zip(range(20,26), note_dxes):
                 y = int(self.elapsed_time * mult)
                 pygame.draw.line(screen, (255,255,255,255), (0,y), (screen.get_width()-1, y), 5)
+
+		# draw the notes going along the string lines.
+		note_x = note_dx * self.elapsed_time * 3
+                pygame.draw.line(screen, (255,0,0,255), (note_x,y+5), (note_x, y-5), 4)
+
 
 
 

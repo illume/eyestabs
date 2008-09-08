@@ -79,11 +79,40 @@ Need to set up a test framework.
 
 
 
+2008/09/09 07:09:10 AEST GMT +10
+
+starting a quick burst in the morning.
+
+Didn't get anything much done last night.  Was too tired.
+
+
+
+2008/09/09 07:19:46 AEST GMT +10
+
+Updated the intro... looks kind of better now.
+
+
+Now a note tapping interface...
+
+
+- from [[note,time], ...] 
+- display notes across the screen.   
+    - total time, eg 30.0 seconds - divided by screen width (640)
+        - draw a note at the pos, or an underline.
+
+- display position of time.  As a line from top of screen to bottom.
+
+- You need to tap within a certain amount of error for each note.
+    - eg, might be 0.5, or 1.0 seconds.  Need to test, and tweak for good value.
 
 
 
 
 
+2008/09/09 07:44:29 AEST GMT +10
 
+Got the game going from the intro to NoteGuess part of the game.
+
+Now to display the parts.
 
 
