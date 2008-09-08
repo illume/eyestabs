@@ -1,0 +1,7 @@
+* Checkout the code
+* Add a test directory 
+* Copy in the pygame test runner
+* Create a fixture directory
+* Commit
+
+* Create a tablature test file
