@@ -66,32 +66,9 @@ def mode(start, which_mode):
     pos = MODES.index(which_mode)
     return major[pos:] + major[:pos]
 
-################################################################################
-
-def pitch_mapping():
-    degree = math.pow(2, 1/12.0)
-
-    e_scale = scale('E')
-
-    start_frequency = 55 * math.pow(degree, 7)
-    semitones = range(49)   # 4 Octaves,
-
-    return [
-        (
-            start_frequency * math.pow(degree, i),
-            e_scale[i%12] + str(i/12 + 1)
-        )
-        for i in semitones
-    ]
-
-def closest_note(mapping, search):
-    return min(mapping, key=lambda i: abs(search - i[0]))
-
-def main():
-    mapping = pitch_mapping()
-    print closest_note(mapping, 123)
-    
-################################################################################
+def midi_to_note(midi_number):
+    midi_int = int(round(midi_number))
+    return NOTES[midi_int % 12] + str((midi_int - 12) / 12)
 
 if __name__ == '__main__':
     main()
