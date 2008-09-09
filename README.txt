@@ -13,7 +13,12 @@ You might need to install some of these before running the game:
   Python:     http://www.python.org/
   PyGame:     http://www.pygame.org/
 
-
+  PyAudio:     
+    
+    Windows Binary:
+      http://people.csail.mit.edu/hubert/pyaudio/packages/pyaudio-0.2.0.py25.exe
+    
+  SoundAnalyse:    http://pypi.python.org/packages/source/S/SoundAnalyse/SoundAnalyse-0.1.0.tar.gz#md5=209c0e0dd312e5bc67bfb3dbf215efd7
 
 RUNNING THE GAME:
 

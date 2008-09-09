@@ -23,8 +23,6 @@ from noteguess import NoteGuess
 
 
 class Top(Game):
-    
-
     def handle_events(self, events):
 
         # handle our events first, then the childrens.
@@ -89,13 +87,12 @@ class Top(Game):
 def main():
     print "Hello from your game's main()"
     print data.load('sample.txt').read()
-
-    fps = 30
-    screen_size = (640,480)
-
+    
+    pygame.mixer.pre_init(44100,-16,2, 1024* 4)
     #pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
 
     pygame.init()
+    pygame.fastevent.init()
     
     # start playing intro track, before the screen comes up.
     try:
@@ -106,8 +103,9 @@ def main():
         print "failed playing music track: '%s'" % intro_track
 
 
-    screen = pygame.display.set_mode(screen_size)
+    screen = pygame.display.set_mode(SCREEN_SIZE)
     
+
     top = Top(name = "Eye stabs.  Do you?")
     top.set_main()
     
@@ -134,7 +132,7 @@ def main():
 	if elapsed_time:
 	    elapsed_time = elapsed_time / 1000.
 
-        events = pygame.event.get()
+        events = pygame.fastevent.get()
 
         top.handle_events(events)
 
@@ -150,9 +148,6 @@ def main():
 	    pygame.display.update(rects)
 	#pygame.display.update(rects)
 
-	clock.tick(fps)
-
+	clock.tick(FPS)
 
     pygame.quit()
-
-
