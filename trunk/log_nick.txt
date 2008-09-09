@@ -7,3 +7,34 @@
 * Create a tablature test file
 * created notes.py + analyse_play.py prototype
 
+* Replaced usage of event with fastevent
+
+* Moved constants into constants.py
+
+* Wrote email to author of SoundAnalyse
+
+        Nathan,
+        
+        Greetings! I am currently using your great little AudioAnalyse python module for
+        a game in PyWeek.
+        
+        Have you used it for any games? Do you have any more examples other than what
+        is posted on google code?
+        
+        My approach to using the module has been to create a background thread and use
+        fastevent to post PITCH_DETECT events.
+        
+        I am currently using a very simple (probably too simple) heuristic for detecting
+        new notes.
+        
+        If the note is a different pitch or the note is a certain amount louder than the
+        previous note then it's a "new" note.
+        
+        I want to use the module to detect quite precisely when in time each note is 
+        started. 
+        
+        I am using it for a game that uses a guitar as input device.
+        
+        Do you have any ideas?
+        
+        Cheers.
