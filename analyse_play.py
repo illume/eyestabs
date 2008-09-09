@@ -24,17 +24,21 @@ from constants import *
 # These values will probably need to be tweaked for each guitar
 
 # note must be at least this to be counted
-MINIMUM_VOLUME     = -20
+# The higher the less chance "noise" will be detected as notes but means notes
+# must be played hard
+
+MINIMUM_VOLUME     = -15
 
 # The range is 0dB for the maximally loud sounds down to -40dB for silence.
 # Typical very loud sounds are -1dB and typical silence is -36dB.
 
-# note must be X louder than previous to count as new note
-ATTACK_DELTA       =  2
+# note must be X decibels louder than previous to count as new note
+ATTACK_DELTA       =  1.5
 
-# X midi notes
+# X midi notes, semitones
 OCTAVE_CORRECTION  =  12
 
+# Analyse X samples at a time
 SAMPLE_SIZE        =  1024
 
 ################################################################################
@@ -71,11 +75,13 @@ class PitchDectectThread(threading.Thread):
         self.init_audio()
 
         last_note = last_vol = last_time = 0
-
+        
+        volumes = []
+        
         while True:
             # Read raw data
             rawsamps = self.stream.read(SAMPLE_SIZE)
-            t = timing.get_time()
+            t = self.stream.get_time()
 
             # Convert raw data to NumPy array
             samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
@@ -89,11 +95,12 @@ class PitchDectectThread(threading.Thread):
                 latest_vol = analyse.loudness(samps)
                 
                 attacked = latest_vol - last_vol > ATTACK_DELTA
-                
+
                 if latest_note != last_note or attacked:
                     if latest_vol > MINIMUM_VOLUME:
                         self.post_note(latest_note, t, t - last_time, latest_vol)
-
+                        
+                        
                     last_note = latest_note
                     last_vol = latest_vol
                     last_time = t
