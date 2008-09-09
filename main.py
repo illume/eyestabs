@@ -8,6 +8,8 @@ import pygame
 from pygame.locals import *
 
 
+import constants
+
 # Game is an interface for different sections of the game.
 #    Similar to a Movie in flash.
 # Each section of the game will have a separate object controlling it.
@@ -85,10 +87,10 @@ class Top(Game):
 
 
 def main():
-    print "Hello from your game's main()"
-    print data.load('sample.txt').read()
+    #print "Hello from your game's main()"
+    #print data.load('sample.txt').read()
     
-    pygame.mixer.pre_init(44100,-16,2, 1024* 4)
+    #pygame.mixer.pre_init(44100,-16,2, 1024* 4)
     #pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
 
     pygame.init()
@@ -103,7 +105,7 @@ def main():
         print "failed playing music track: '%s'" % intro_track
 
 
-    screen = pygame.display.set_mode(SCREEN_SIZE)
+    screen = pygame.display.set_mode(constants.SCREEN_SIZE)
     
 
     top = Top(name = "Eye stabs.  Do you?")
@@ -148,6 +150,20 @@ def main():
 	    pygame.display.update(rects)
 	#pygame.display.update(rects)
 
-	clock.tick(FPS)
+	clock.tick(constants.FPS)
 
     pygame.quit()
+
+
+
+
+
+
+
+
+
+
+
+
+
+

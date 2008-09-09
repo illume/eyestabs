@@ -14,6 +14,7 @@ class Intro(Game):
         self.font = pygame.font.Font(None, self.font_size)
         self.font_color = (255,255,255,255)
 
+        # should we be drawing the line element of the intro?
         self.draw_lines = 0
 
     def handle_events(self, events):
@@ -23,6 +24,10 @@ class Intro(Game):
             if e.type == KEYDOWN:
                 if e.key == K_ESCAPE:
                     self.stop()
+                if e.key == K_s:
+                    pass
+                    #pygame.image.save(pygame.display.get_surface(), "eye_stab_screeny_2008_09_09.png")
+                    
         
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
@@ -55,7 +60,7 @@ class Intro(Game):
 
         screen.fill((0,0,0,255))
 
-	# draw the text in the middle of the screen.
+        # draw the text in the middle of the screen.
         x,text_y = screen.get_rect().center
         text_x = x - (the_text.get_width() / 2)
 
@@ -63,19 +68,19 @@ class Intro(Game):
 
 
 
-	# how fast the notes move.  difference in x.
-	note_dxes = [5,8,10,3,6,12]
+        # how fast the notes move.  difference in x.
+        note_dxes = [5,8,10,3,6,12]
 
         if self.draw_lines:
-	    # lines (guitar strings) go down the screen.
-	    #    Some notes move across each of the strings at different speeds.
+            # lines (guitar strings) go down the screen.
+            #    Some notes move across each of the strings at different speeds.
             
             for mult, note_dx in zip(range(20,26), note_dxes):
                 y = int(self.elapsed_time * mult)
                 pygame.draw.line(screen, (255,255,255,255), (0,y), (screen.get_width()-1, y), 5)
 
-		# draw the notes going along the string lines.
-		note_x = note_dx * self.elapsed_time * 3
+                # draw the notes going along the string lines.
+                note_x = note_dx * self.elapsed_time * 3
                 pygame.draw.line(screen, (255,0,0,255), (note_x,y+5), (note_x, y-5), 4)
 
 

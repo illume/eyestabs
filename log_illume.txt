@@ -116,3 +116,74 @@ Got the game going from the intro to NoteGuess part of the game.
 Now to display the parts.
 
 
+
+2008/09/10 06:34:35 AEST GMT +10
+
+
+I got SoundAnalyse compiling and installing.  I also made a windows installer for it.
+
+
+
+
+Now to get the noteguess part done.
+
+
+
+
+
+
+2008/09/10 06:43:26 AEST GMT +10
+
+a bit of trouble figuring out what to do.
+
+Fixed up main.py which was converted to use constants.py and fastevents
+
+
+- from [[note,time], ...] 
+- display notes across the screen.   
+    - total time, eg 30.0 seconds - divided by screen width (640)
+        - draw a note at the pos, or an underline.
+
+DONE - display position of time.  As a line from top of screen to bottom.
+
+- You need to tap within a certain amount of error for each note.
+    - eg, might be 0.5, or 1.0 seconds.  Need to test, and tweak for good value.
+
+
+
+
+
+
+2008/09/10 07:04:42 AEST GMT +10
+
+Got the tapping of lines done ok.  
+
+Except they are placed to the left of the mark... not on the mark.  oh well.
+
+
+Might also need a line to show more precisely where the note falls.
+
+
+
+
+2008/09/10 07:14:03 AEST GMT +10
+
+Drew a little line under the letters.  It does show it more precisely.
+
+- draw notes, or note underlines they need to play.
+- figure out the incoming notes 
+
+
+
+
+Will need to have a set of songs, that people need to play back.
+
+
+
+
+
+
+
+
+
+
