@@ -101,8 +101,8 @@ if __name__ == '__main__':
     t.start()
 
     while True:
-        events = [pygame.event.wait()] + pygame.event.get()
-        for event in events:
-            print event
+        events = pygame.fastevent.get()
+        for e in events:
+            print e
 
 ################################################################################
