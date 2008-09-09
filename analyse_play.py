@@ -26,11 +26,16 @@ from constants import *
 # note must be at least this to be counted
 MINIMUM_VOLUME     = -20
 
+# The range is 0dB for the maximally loud sounds down to -40dB for silence.
+# Typical very loud sounds are -1dB and typical silence is -36dB.
+
 # note must be X louder than previous to count as new note
 ATTACK_DELTA       =  2
 
 # X midi notes
 OCTAVE_CORRECTION  =  12
+
+SAMPLE_SIZE        =  1024
 
 ################################################################################
 
@@ -69,7 +74,7 @@ class PitchDectectThread(threading.Thread):
 
         while True:
             # Read raw data
-            rawsamps = self.stream.read(1024)
+            rawsamps = self.stream.read(SAMPLE_SIZE)
             t = timing.get_time()
 
             # Convert raw data to NumPy array
