@@ -5,3 +5,5 @@
 * Commit
 
 * Create a tablature test file
+* created notes.py + analyse_play.py prototype
+
