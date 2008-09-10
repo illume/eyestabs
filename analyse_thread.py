@@ -25,6 +25,8 @@ from constants import *
 ################################################################################
 
 class PitchDectectThread(threading.Thread):
+    going = True
+    
     def __init__(self, *args, **kw):
         threading.Thread.__init__(self)
         self._args = args
@@ -55,8 +57,7 @@ class PitchDectectThread(threading.Thread):
         ret_code = None
         response = []
 
-        while ret_code is None:
-            ret_code = proc.poll()
+        while self.going:
             event = eval(proc.stdout.readline().strip())
             if event:
                 self.post_note(event)
@@ -66,9 +67,16 @@ class PitchDectectThread(threading.Thread):
 ################################################################################
 
 def init():
+    global t
+    
     t = PitchDectectThread()
     t.setDaemon(1)
     t.start()
+
+
+def quit():
+    global t
+    t.going = False
 
 def example():
     pygame.init()

@@ -51,10 +51,6 @@ def main():
     )
     
     last_note = last_vol = last_time = 0
-    
-    volumes = []
-    
-    log = open('fuck.txt', 'a')
 
     while True:
         t = timing.get_time()
