@@ -127,8 +127,8 @@ while True:
         time.sleep(0.01)
         continue
 
-    rawsamps = stream.read(available)[-sample_size*pyaudio.paInt16:]
-    samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
+    rawsamps = stream.read(available)
+    samps = numpy.fromstring(rawsamps, dtype=numpy.int16, count=sample_size)
 
     event = ''
     
