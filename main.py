@@ -31,6 +31,9 @@ class Top(Game):
             if e.type == KEYDOWN:
                 if e.key == K_ESCAPE:
                     self.check_transition()
+                if e.key == K_s:
+                    pass
+                    pygame.image.save(pygame.display.get_surface(), "eye_stab_screeny_2008_09_10.png")
 
             if e.type == QUIT:
                 self.going = False
