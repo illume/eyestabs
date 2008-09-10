@@ -29,7 +29,7 @@ MINIMUM_VOLUME     = -13
 # Typical very loud sounds are -1dB and typical silence is -36dB.
 
 # note must be X decibels louder than previous to count as new note
-ATTACK_THRESHOLD       =  2.5
+ATTACK_THRESHOLD       =  1.5
 
 # X midi notes, semitones
 OCTAVE_CORRECTION  =  12
@@ -58,7 +58,7 @@ def main():
         rawsamps = stream.read(SAMPLE_SIZE)
         samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
 
-        event = None
+        event = ''
 
         midi_note = analyse.musical_detect_pitch(samps, min_note=28.0)
 
@@ -72,7 +72,7 @@ def main():
     
             if latest_note != last_note or attacked:
                 if latest_vol > MINIMUM_VOLUME:
-                    event = repr({'note':latest_note, 'time': t})
+                    event = {'note':latest_note, 'time': t}
                     last_time = t
 
                 last_note = latest_note
