@@ -98,7 +98,7 @@ def main():
     pygame.init()
     pygame.fastevent.init()
     
-    # analyse_thread.init()
+    analyse_thread.init()
     
     # start playing intro track, before the screen comes up.
     try:
