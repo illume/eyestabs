@@ -15,6 +15,8 @@ import constants
 # Each section of the game will have a separate object controlling it.
 #    For sections like the 'intro' and the 'end sequence' will have 
 #      separate Game objects.
+# See game.py for more information.
+
 
 from game import Game
 from intro import Intro
@@ -40,15 +42,16 @@ class Top(Game):
 
         # this handles the childrens events amongst others.
         Game.handle_events(self, events)
-
     
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
 
+    def draw(self, screen):
+        rects = Game.draw(self, screen)
 
-    def stop(self):
-        print 'stopping Top'
-        self.going = False
+        return rects
+
+
 
 
     def check_transition(self):
@@ -58,6 +61,10 @@ class Top(Game):
         # which part of the game are we going into?
         if self.intro.going:
             self.intro.stop()
+            # stop the intro music.
+            pygame.mixer.music.fadeout(100)
+            pygame.mixer.music.stop()
+
             self.note_guess.load()
             self.note_guess.start()
             self.note_guess.set_main()
@@ -67,20 +74,6 @@ class Top(Game):
         else:
             print 'ok'
             self.stop()
-
-
-
-
-
-    def draw(self, screen):
-        rects = Game.draw(self, screen)
-
-
-
-
-        return rects
-
-
 
 
 
@@ -140,22 +133,38 @@ def main():
 
         events = pygame.fastevent.get()
 
+        # we pass in the events so all of them can get the events.
         top.handle_events(events)
 
+        # each part that uses time, for animation or otherwise
+        #   gets the same amount of elapsed time.  This also reduces the
+        #   number of system calls (gettimeofday) to one per frame.
         top.update(elapsed_time)
-
+        
+        
+        # the draw method retunrns a list of rects, 
+        #   for where the screen needs to be updated.
         rects = top.draw(screen)
-
+        
         # remove empty rects.
         rects = filter(lambda x: x != [], rects)
-
+        
         # if not empty, then update the display.
         if rects != []:
             pygame.display.update(rects)
         #pygame.display.update(rects)
-
+        
+        # we ask the clock to try and stay at a FPS rate( eg 30fps).
+        #  It won't get exactly this, but it tries to get close.
         clock.tick(constants.FPS)
-    
+
+
+    # we try and clean up explicitly, and more nicely... 
+    #    rather than hoping python will clean up correctly for us.
     pygame.quit()
     
     analyse_thread.quit()
+
+
+
+

@@ -48,11 +48,6 @@ class Intro(Game):
 
 
 
-    def stop(self):
-        """
-        """
-        print 'intro stopped'
-        self.going = False
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
@@ -94,6 +89,11 @@ class Intro(Game):
 
 
 
+    def stop(self):
+        """
+        """
+        print 'intro stopped'
+        self.going = False
 
 
 

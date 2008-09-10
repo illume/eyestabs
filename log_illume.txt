@@ -184,6 +184,133 @@ Will need to have a set of songs, that people need to play back.
 
 
 
+2008/09/11 06:19:49 AEST GMT +10
+
+Nicholas got the pitch detection hooked up to the game.
+
+
+I tried it with my casio keyboard and built in laptop mic... it seems to work fine :)
+
+
+
+
+
+
+2008/09/11 06:38:21 AEST GMT +10
+
+Spent a bit of time making the code look nicer...
+
+
+Now I need to figure out the different parts.
+
+
+
+Areas:
+
+- intro
+- doctors surgery.
+- note tapping.
+    - this will be a club scene.
+- club selection.
+
+
+
+2008/09/11 06:55:57 AEST GMT +10
+
+spoke to guy about getting our internet connection at home.
+
+... I'm not really sure if that would actually save me time... 
+  or if it'd waste coding time on the internet.
+
+Anyway, I think I'll have internet access tonight.  
+    Easier than going to a cafe with wireless I guess.
+
+
+Areas:
+- intro
+- doctors surgery.
+- note tapping.
+    - this will be a club scene.
+- club selection.
+
+
+Things you do:
+- play notes
+- get stabbed in the eye if you get a certain number of notes wrong.
+- get cash on winning.   Lose cash getting to gigs.
+- get eyeballs.  Lose eyeballs getting them stabbed.
+
+
+
+
+2008/09/11 07:12:48 AEST GMT +10
+
+
+Started a Player class.  Not much in there at the moment.
+
+
+- make doctors_surgery.py club_select.py
+- note tapping... 
+    - show ok interval.   Left and right bars.
+    - show when the player gets it correct.
+
+
+
+2008/09/11 07:47:47 AEST GMT +10
+
+
+Whilst making the gig select, and doctors surgery... 
+
+I noted that this could be a gig simulator too.  
+
+Where people can offer you gigs, and you decide which to take or not.  
+Some will offer you a rider of 10 beers, and a bowl of soup after the gig... 
+  but never give it to you!   Bastards!  Gigs might cost you money.
+
+
+You can collect myspace friends, and even friendster, and linked-in friends.
+
+You can also collect fans, and stalkers.
+
+
+
+
+Areas:
+- intro
+- doctors surgery.
+- note tapping.
+    - this will be a club scene.
+- club selection.
+
+
+Things you do:
+- play notes
+- get stabbed in the eye if you get a certain number of notes wrong.
+- get cash on winning.   Lose cash getting to gigs.
+- get eyeballs.  Lose eyeballs getting them stabbed.
+- collect fans friends and stalkers.
+
+
+
+
+
+
+
+
+
+2008/09/11 07:58:54 AEST GMT +10
+
+
+
+
+
+2008/09/11 08:10:15 AEST GMT +10
+
+drew the 'allowed error' markers.
+
+
+
+
 
 
 
