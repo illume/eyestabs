@@ -147,6 +147,9 @@ class NoteGuess(Game):
                 if e.unicode in NOTES: 
                     print "HIIH!!"
                     notes_pressed.append(e.unicode)
+            if e.type == constants.PITCH_DETECT:
+                notes_pressed.append(e.note)
+
 
         self.notes_last_pressed = notes_pressed
 
