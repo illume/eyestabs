@@ -3,6 +3,7 @@
 
 import sys
 import random
+import time
 
 # 3RD PARTY LIBS
 import pygame
@@ -71,9 +72,7 @@ paramaters = Paramaters (
     
     ("octave_correction",    -2,     2,     1,       int),
     
-    ("sample_size",          512,   4096,  1024,   lambda s: int((s//512)*512)),
-    
-    ("sleep_time",           0,     100,   0,       int)
+    ("sample_size",          512,   4096,  1024,   lambda s: int((s//256)*256)),
 )
 
 ################################################################################
@@ -111,11 +110,26 @@ last_note = last_vol = last_time = 0
 ################################################################################
 
 while True:
+    events = pygame.event.get ()
+    for ev in events:
+        if ev.type == pygame.QUIT:
+            sys.exit ()
+    
+    if events:
+        re.distribute_events (*events)
+        re.refresh ()
+
     t = timing.get_time()
     
-    rawsamps = stream.read(paramaters.sample_size)
+    available = stream.get_read_available()
+    sample_size = int(paramaters.sample_size)
+    if not available > sample_size:
+        time.sleep(0.01)
+        continue
+
+    rawsamps = stream.read(available)[-sample_size*pyaudio.paInt16:]
     samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
-    
+
     event = ''
     
     midi_note = analyse.musical_detect_pitch(samps, min_note=28.0)
@@ -139,19 +153,8 @@ while True:
     elif last_note:
         last_note = None
 
-    if event:
-        print event
-        sys.stdout.flush()
+    print event
+    sys.stdout.flush()
 
-    events = pygame.event.get ()
-    for ev in events:
-        if ev.type == pygame.QUIT:
-            sys.exit ()
-
-    re.distribute_events (*events)
-    re.refresh ()
-
-    if paramaters.sleep_time:
-        pygame.time.delay (paramaters.sleep_time)
     
 ################################################################################
