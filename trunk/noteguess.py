@@ -80,7 +80,8 @@ class NoteGuess(Game):
 
 
         # draw the notes we need to play.
-        self.draw_notes_time(self.current_song.notes_time, text_y + 50, screen)
+        self.draw_notes_time(self.current_song.notes_time, text_y + 50, screen, 
+                             draw_allowed = True, allowed_time = 0.3)
 
 
         # clear the notes that we've processed.
@@ -92,7 +93,7 @@ class NoteGuess(Game):
         return rects
 
 
-    def draw_notes_time(self, notes_time, text_y, screen):
+    def draw_notes_time(self, notes_time, text_y, screen, draw_allowed = False, allowed_time = 0.3):
         rects = []
 
         for n,t in notes_time:
@@ -100,6 +101,7 @@ class NoteGuess(Game):
             # the left of the letter is where it is.  
             #    Should it be the center of the letter?
             text_x = self.get_position_for_time(t)
+
 
             the_text = self.font.render(n, 1, self.font_color)
 
@@ -111,6 +113,29 @@ class NoteGuess(Game):
                                  line_color, (text_x, text_blit_r.bottom), 
                                  (text_x, text_blit_r.bottom - 5), 1)
             rects.append(r)
+
+
+            # draw the line on each side of the note... allowed time.
+
+            note_left = self.get_position_for_time(t - allowed_time)
+            note_right = self.get_position_for_time(t + allowed_time)
+
+
+            if draw_allowed:
+                line_color = (0,255,0,255)
+                r = pygame.draw.line(screen, 
+                                     line_color, (note_left, text_blit_r.bottom+5), 
+                                     (note_left, text_blit_r.bottom - 5), 2)
+                rects.append(r)
+                r = pygame.draw.line(screen, 
+                                     line_color, (note_right, text_blit_r.bottom+5), 
+                                     (note_right, text_blit_r.bottom - 5), 2)
+                rects.append(r)
+
+
+
+
+
 
         return rects
 
