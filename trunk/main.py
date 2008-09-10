@@ -158,4 +158,4 @@ def main():
     
     pygame.quit()
     
-    # analyse_thread.quit()
+    analyse_thread.quit()
