@@ -26,7 +26,7 @@ from constants import *
 
 class PitchDectectThread(threading.Thread):
     going = True
-    
+
     def __init__(self, *args, **kw):
         threading.Thread.__init__(self)
         self._args = args
@@ -38,7 +38,7 @@ class PitchDectectThread(threading.Thread):
         for _ in range(5):
             try:
                 pygame.fastevent.post (
-                    event.Event ( PITCH_DETECT, **attributes)
+                    event.Event( PITCH_DETECT, **attributes)
                 )
                 break
             except Exception, e:
@@ -58,9 +58,9 @@ class PitchDectectThread(threading.Thread):
         response = []
 
         while self.going:
-            event = eval(proc.stdout.readline().strip())
+            event = proc.stdout.readline().strip()
             if event:
-                self.post_note(event)
+                self.post_note(eval(event))
 
         print 'thread ended'
 
