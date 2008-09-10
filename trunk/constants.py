@@ -8,3 +8,6 @@ SCREEN_SIZE = (640,480)
 
 # how much time do they have to get a note?
 TIME_MS_TO_GET_NOTE = 200
+
+
+# other constants can go here!
