@@ -10,4 +10,4 @@ SCREEN_SIZE = (640,480)
 TIME_MS_TO_GET_NOTE = 200
 
 
-# other constants can go here!
+# other constants can go here!   yes indeed...
