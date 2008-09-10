@@ -4,6 +4,8 @@ import pygame
 from game import Game
 import songs
 
+import constants
+
 # Show notes on the screen, and people have to tap keyboard in time with notes.
 
 # notes_time = [["a", 0.0+s], ["c", 2.0+s], ["b", 4.0+s], ["c", 7.0+s], ]
