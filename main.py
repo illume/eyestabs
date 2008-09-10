@@ -22,19 +22,18 @@ from intro import Intro
 #    Or playing your guitar.
 from noteguess import NoteGuess
 
-
+import analyse_thread
 
 class Top(Game):
     def handle_events(self, events):
-
         # handle our events first, then the childrens.
-	for e in events:
-	    if e.type == KEYDOWN:
-	        if e.key == K_ESCAPE:
-		    self.check_transition()
+        for e in events:
+            if e.type == KEYDOWN:
+                if e.key == K_ESCAPE:
+                    self.check_transition()
 
-	    if e.type == QUIT:
-	        self.going = False
+            if e.type == QUIT:
+                self.going = False
 
         # this handles the childrens events amongst others.
         Game.handle_events(self, events)
@@ -46,25 +45,25 @@ class Top(Game):
 
     def stop(self):
         print 'stopping Top'
-	self.going = False
+        self.going = False
 
 
     def check_transition(self):
-	""" See which part of the game we are at, and where we should go.
-	"""
+        """ See which part of the game we are at, and where we should go.
+        """
         
         # which part of the game are we going into?
-	if self.intro.going:
-	    self.intro.stop()
-	    self.note_guess.load()
-	    self.note_guess.start()
-	    self.note_guess.set_main()
+        if self.intro.going:
+            self.intro.stop()
+            self.note_guess.load()
+            self.note_guess.start()
+            self.note_guess.set_main()
 
-	elif self.note_guess.going:
-	    self.note_guess.stop()
-	else:
-	    print 'ok'
-	    self.stop()
+        elif self.note_guess.going:
+            self.note_guess.stop()
+        else:
+            print 'ok'
+            self.stop()
 
 
 
@@ -76,7 +75,7 @@ class Top(Game):
 
 
 
-	return rects
+        return rects
 
 
 
@@ -95,6 +94,8 @@ def main():
 
     pygame.init()
     pygame.fastevent.init()
+    
+    # analyse_thread.init()
     
     # start playing intro track, before the screen comes up.
     try:
@@ -131,26 +132,26 @@ def main():
     
     while top.going:
         elapsed_time = clock.get_time()
-	if elapsed_time:
-	    elapsed_time = elapsed_time / 1000.
+        if elapsed_time:
+            elapsed_time = elapsed_time / 1000.
 
         events = pygame.fastevent.get()
 
         top.handle_events(events)
 
-	top.update(elapsed_time)
+        top.update(elapsed_time)
 
-	rects = top.draw(screen)
+        rects = top.draw(screen)
 
-	# remove empty rects.
-	rects = filter(lambda x: x != [], rects)
+        # remove empty rects.
+        rects = filter(lambda x: x != [], rects)
 
-	# if not empty, then update the display.
-	if rects != []:
-	    pygame.display.update(rects)
-	#pygame.display.update(rects)
+        # if not empty, then update the display.
+        if rects != []:
+            pygame.display.update(rects)
+        #pygame.display.update(rects)
 
-	clock.tick(constants.FPS)
+        clock.tick(constants.FPS)
 
     pygame.quit()
 
