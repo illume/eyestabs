@@ -65,7 +65,7 @@ def main():
         samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
     
         midi_note = analyse.musical_detect_pitch(samps, min_note=28.0)
-    
+
         if midi_note:
             midi_note += OCTAVE_CORRECTION
     
@@ -88,6 +88,9 @@ def main():
     
         elif last_note:
             last_note = None
+
+            print repr({'note':'nothing', 'time': t})
+            sys.stdout.flush()
 
 if __name__ == '__main__':
     main()
