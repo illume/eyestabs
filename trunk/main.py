@@ -155,19 +155,7 @@ def main():
         #pygame.display.update(rects)
 
         clock.tick(constants.FPS)
-
+    
     pygame.quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    # analyse_thread.quit()

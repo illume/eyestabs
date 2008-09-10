@@ -30,14 +30,11 @@ class NoteGuess(Game):
         
         # total time allowed in the song.
         self.total_time = 30.
-        
-
 
         self.font_size = 40
         self.font = pygame.font.Font(None, self.font_size)
         self.font_color = (255,255,255,255)
         self.font_color = (0,0,0,255)
-
 
         # the song currently being played.
         self.current_song = songs.Song()
@@ -46,7 +43,6 @@ class NoteGuess(Game):
 
         s = 2.0
         self.current_song.notes_time = [["a", 0.0+s], ["c", 2.0+s], ["b", 4.0+s], ["c", 7.0+s], ]
-
 
     def draw(self, screen):
         """
@@ -78,31 +74,22 @@ class NoteGuess(Game):
                          (time_line_x, screen.get_height()), 1)
 
 
-
-
-
         # draw the position of played notes time
         text_y = screen.get_rect().center[1]
         self.draw_notes_time(self.notes_time, text_y, screen)
-
 
 
         # draw the notes we need to play.
         self.draw_notes_time(self.current_song.notes_time, text_y + 50, screen)
 
 
-
-
-
-
         # clear the notes that we've processed.
         #self.notes_time = []
+
 
         # update the whole screen.
         rects.append( screen.get_rect() )
         return rects
-
-        
 
 
     def draw_notes_time(self, notes_time, text_y, screen):
@@ -149,12 +136,11 @@ class NoteGuess(Game):
                 if e.unicode in NOTES: 
                     print "HIIH!!"
                     notes_pressed.append(e.unicode)
+
             if e.type == constants.PITCH_DETECT:
                 notes_pressed.append(e.note)
 
-
         self.notes_last_pressed = notes_pressed
-
 
     def update_notes(self, elapsed_time):
         # translate the notes into [[note, elapsed_time], ]

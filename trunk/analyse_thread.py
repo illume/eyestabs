@@ -33,8 +33,6 @@ class PitchDectectThread(threading.Thread):
         self.running = True
 
     def post_note(self, attributes):
-        if attributes['note'] == "nothing":
-            return
         for _ in range(5):
             try:
                 pygame.fastevent.post (
@@ -58,10 +56,10 @@ class PitchDectectThread(threading.Thread):
         response = []
 
         while ret_code is None:
-            print 'asdf 1'
             ret_code = proc.poll()
-            print 'asdf 2'
-            self.post_note(eval(proc.stdout.readline().strip()))
+            event = eval(proc.stdout.readline().strip())
+            if event:
+                self.post_note(event)
 
         print 'thread ended'
 
