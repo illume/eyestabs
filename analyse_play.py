@@ -23,13 +23,13 @@ from constants import *
 # The higher the less chance "noise" will be detected as notes but means notes
 # must be played hard
 
-MINIMUM_VOLUME     = -15
+MINIMUM_VOLUME     = -13
 
 # The range is 0dB for the maximally loud sounds down to -40dB for silence.
 # Typical very loud sounds are -1dB and typical silence is -36dB.
 
 # note must be X decibels louder than previous to count as new note
-ATTACK_THRESHOLD       =  2
+ATTACK_THRESHOLD       =  2.5
 
 # X midi notes, semitones
 OCTAVE_CORRECTION  =  12
@@ -55,15 +55,15 @@ def main():
     volumes = []
     
     log = open('fuck.txt', 'a')
-        
+
     while True:
-        # Read raw data
+        t = timing.get_time()
+
         rawsamps = stream.read(SAMPLE_SIZE)
-        t = stream.get_time()
-    
-        # Convert raw data to NumPy array
         samps = numpy.fromstring(rawsamps, dtype=numpy.int16)
-    
+
+        event = None
+
         midi_note = analyse.musical_detect_pitch(samps, min_note=28.0)
 
         if midi_note:
@@ -76,11 +76,7 @@ def main():
     
             if latest_note != last_note or attacked:
                 if latest_vol > MINIMUM_VOLUME:
-                    delta = t - last_time
-
-                    print repr({'note':latest_note, 'time': t})
-                    sys.stdout.flush()
-
+                    event = repr({'note':latest_note, 'time': t})
                     last_time = t
 
                 last_note = latest_note
@@ -89,8 +85,8 @@ def main():
         elif last_note:
             last_note = None
 
-            print repr({'note':'nothing', 'time': t})
-            sys.stdout.flush()
+        print event
+        sys.stdout.flush()
 
 if __name__ == '__main__':
     main()
