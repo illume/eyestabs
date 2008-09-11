@@ -1,15 +1,21 @@
 APP_NAME = 'EyeStabs'
 
+import os
 
-files_to_remove = ['',
-'tk84.dll',
-'_ssl.pyd',
-'tcl84.dll',
-'numpy/core/_dotblas.pyd',
-'numpy/linalg/lapack_lite.pyd',
+files_to_remove = ['tk84.dll',
+                    '_ssl.pyd',
+                    'tcl84.dll',
+                    os.path.join('numpy','core', '_dotblas.pyd'),
+                    os.path.join('numpy', 'linalg', 'lapack_lite.pyd'),
+]
 
-directories_to_remove = ['numpy/distutils/',
-'distutils',
+
+directories_to_remove = [os.path.join('numpy', 'distutils'),
+                         'distutils',
+                         'tcl',
+]
+
+
 
 cfg = {
     'name':APP_NAME,
@@ -109,7 +115,7 @@ if cmd in ('py2exe',):
     setup(
         options={'py2exe':{
             'dist_dir':dist_dir,
-            'dll_excludes':['_dotblas.pyd','_numpy.pyd', 'numpy.linalg.lapack_lite.pyd', 'numpy.core._dotblas.pyd'],
+            'dll_excludes':['_dotblas.pyd','_numpy.pyd', 'numpy.linalg.lapack_lite.pyd', 'numpy.core._dotblas.pyd'] + files_to_remove,
             'excludes':['matplotlib', 'tcl', 'OpenGL'],
             'ignores':['matplotlib', 'tcl', 'OpenGL'],
             'bundle_files':1,
@@ -168,4 +174,34 @@ if cmd in ('py2exe','cx_freeze','py2app'):
         make_dirs(dname)
         if not os.path.isdir(fname):
             shutil.copy(fname,dname)
+
+
+# remove files from the zip.
+if 0 and cmd in ('py2exe'):
+    import shutil
+
+    #shutil.rmtree( os.path.join('dist') )
+    #shutil.rmtree( os.path.join('build') )
+
+
+    os.system("unzip dist/library.zip -d dist\library")
+
+    for fn in files_to_remove:
+        os.remove( os.path.join('dist', 'library', fn) )
+
+
+    for d in directories_to_remove:
+        if os.path.exists( os.path.join('dist', 'library', d) ):
+            shutil.rmtree( os.path.join('dist', 'library', d) )
+
+    os.remove( os.path.join('dist', 'library.zip') )
+
+
+    os.chdir("dist")
+    os.chdir("library")
+
+    os.system("zip -r -9 ..\library.zip .")
+
+    os.chdir("..")
+    os.chdir("..")
 
