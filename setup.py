@@ -1,6 +1,16 @@
 APP_NAME = 'EyeStabs'
 
 
+files_to_remove = ['',
+'tk84.dll',
+'_ssl.pyd',
+'tcl84.dll',
+'numpy/core/_dotblas.pyd',
+'numpy/linalg/lapack_lite.pyd',
+
+directories_to_remove = ['numpy/distutils/',
+'distutils',
+
 cfg = {
     'name':APP_NAME,
     'version':'1.0',
