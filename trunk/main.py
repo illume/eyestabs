@@ -82,6 +82,16 @@ class Top(Game):
 
 
 def main():
+
+
+    # in a compiled exe this can be called.
+    if "analyse_play.py" in sys.argv:
+        import analyse_play
+        analyse_play.main()
+        return
+
+
+
     #print "Hello from your game's main()"
     #print data.load('sample.txt').read()
     
@@ -91,7 +101,7 @@ def main():
     pygame.init()
     pygame.fastevent.init()
     
-    #analyse_thread.init()
+    analyse_thread.init()
     
     # start playing intro track, before the screen comes up.
     try:
@@ -163,7 +173,7 @@ def main():
     #    rather than hoping python will clean up correctly for us.
     pygame.quit()
     
-    #analyse_thread.quit()
+    analyse_thread.quit()
 
 
 
