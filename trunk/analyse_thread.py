@@ -66,7 +66,7 @@ class PitchDectectThread(threading.Thread):
 
         # we need to 
         del proc
-        time.sleep(0.001)
+        #time.sleep(0.001)
         
         print 'thread ended'
 
@@ -84,9 +84,13 @@ def quit():
     global t
     t.going = False
 
+    #print dir(t)
+
+    t.join()
+
     # make sure the thread finalises.
-    time.sleep(0.0001)
-    del t
+    #time.sleep(0.0001)
+    #del t
 
 def example():
     pygame.init()
