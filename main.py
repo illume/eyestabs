@@ -91,7 +91,7 @@ def main():
     pygame.init()
     pygame.fastevent.init()
     
-    analyse_thread.init()
+    #analyse_thread.init()
     
     # start playing intro track, before the screen comes up.
     try:
@@ -163,7 +163,7 @@ def main():
     #    rather than hoping python will clean up correctly for us.
     pygame.quit()
     
-    analyse_thread.quit()
+    #analyse_thread.quit()
 
 
 

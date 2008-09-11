@@ -5,6 +5,7 @@ from game import Game
 import songs
 
 import constants
+import data
 
 # Show notes on the screen, and people have to tap keyboard in time with notes.
 
@@ -32,7 +33,7 @@ class NoteGuess(Game):
         self.total_time = 30.
 
         self.font_size = 40
-        self.font = pygame.font.Font(None, self.font_size)
+        self.font = pygame.font.Font(data.filepath("freesansbold.ttf"), self.font_size)
         self.font_color = (255,255,255,255)
         self.font_color = (0,0,0,255)
 
