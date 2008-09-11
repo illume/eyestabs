@@ -5,13 +5,14 @@ from pygame.locals import *
 import game
 Game = game.Game
 
+import data
 
 
 class Intro(Game):
     def load(self):
         Game.load(self)
         self.font_size = 40
-        self.font = pygame.font.Font(None, self.font_size)
+        self.font = pygame.font.Font(data.filepath("freesansbold.ttf"), self.font_size)
         self.font_color = (255,255,255,255)
 
         # should we be drawing the line element of the intro?

@@ -1,4 +1,4 @@
-APP_NAME = 'MyCoolGame'
+APP_NAME = 'EyeStabs'
 
 
 cfg = {
@@ -10,7 +10,7 @@ cfg = {
     'url':'',
     
     'py2exe.target':'',
-    'py2exe.icon':'icon.ico', #64x64
+    #'py2exe.icon':'icon.ico', #64x64
     'py2exe.binary':APP_NAME, #leave off the .exe, it will be added
     
     'py2app.target':'',
@@ -99,11 +99,15 @@ if cmd in ('py2exe',):
     setup(
         options={'py2exe':{
             'dist_dir':dist_dir,
-            'dll_excludes':['_dotblas.pyd','_numpy.pyd']
+            'dll_excludes':['_dotblas.pyd','_numpy.pyd', 'numpy.linalg.lapack_lite.pyd', 'numpy.core._dotblas.pyd'],
+            'excludes':['matplotlib', 'tcl', 'OpenGL'],
+            'ignores':['matplotlib', 'tcl', 'OpenGL'],
+            'bundle_files':1,
             }},
-        windows=[{
+#        windows=[{
+       console=[{
             'script':dest,
-            'icon_resources':[(1,cfg['py2exe.icon'])],
+            #'icon_resources':[(1,cfg['py2exe.icon'])],
             }],
         )
 
