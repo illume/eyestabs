@@ -119,7 +119,7 @@ def main():
     analyse_thread.init()
 
     # start playing intro track, before the screen comes up.
-    if 1:
+    if 0:
         try:
             intro_track = os.path.join("data", "intro.ogg")
             pygame.mixer.music.load(intro_track)
@@ -168,8 +168,10 @@ def main():
         
         intro_track = os.path.join("data", "intro.ogg")
         intro_sound = pygame.mixer.Sound(intro_track)
-        intro_array = _array_samples(intro_sound, 1)
-        
+        intro_array = _array_samples(intro_sound, 1)[:705600/2]
+
+        # assert len(intro_array) == 705600
+
         for i in range(2):  # 4 x longer
             intro_array = numpy.append(intro_array, intro_array, 0)
 
