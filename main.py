@@ -209,7 +209,7 @@ def main():
 
 
     # store the player object.
-    player.player = player.Play()
+    player.player = player.Player()
 
 
     top.games.append(intro)
