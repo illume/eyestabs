@@ -13,13 +13,14 @@ Where you get offered gigs, and you decide to take them or not.
 
 import os
 import sys
+import time
 
 # 3RD PARTY LIBS
 import pygame
 from pygame.locals import *
 
-from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, RadioButton, Button
-
+from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, \
+                             RadioButton, Button
 
 from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
 
@@ -84,21 +85,63 @@ class GigSelect(Game):
         self.re.screen = screen
 
         self.gig_widget = GigWidget()
-        
+
         self.gig_widget.button.connect_signal('clicked', self.stop)
 
         for radio in self.gig_widget.radios:
-            radio.connect_signal('clicked', self.update_selection)
+            radio.connect_signal('toggled', self.update_selection)
 
         self.re.add_widget( self.gig_widget.table )
-        
+
+        # {'SIGNALS_KEYS': (2, 3),
+        #  'SIGNALS_MOUSE': (5, 4, 6),
+        #  'SIG_ACTIVATED': 'activated',
+        #  'SIG_CLICKED': 'clicked',
+        #  'SIG_DESTROYED': 'destroyed',
+        #  'SIG_DIALOGRESPONSE': 'dialog-response',
+        #  'SIG_DOUBLECLICKED': 'double-clicked',
+        #  'SIG_ENTER': 'entered',
+        #  'SIG_FOCUSED': 'focused',
+        #  'SIG_INPUT': 'input',
+        #  'SIG_KEYDOWN': 2,
+        #  'SIG_KEYUP': 3,
+        #  'SIG_LEAVE': 'left',
+        #  'SIG_LISTCHANGED': 'list-changed',
+        #  'SIG_MOUSEDOWN': 5,
+        #  'SIG_MOUSEMOVE': 4,
+        #  'SIG_MOUSEUP': 6,
+        #  'SIG_SCREENCHANGED': 28,
+        #  'SIG_SELECTCHANGED': 'selection-changed',
+        #  'SIG_TICK': 25,
+        #  'SIG_TOGGLED': 'toggled',
+        #  'SIG_TWISTED': 26,
+        #  'SIG_UPDATED': 27,
+        # 'SIG_VALCHANGED': 'value-changed'}
+
+      # RADIOBUTTON SIGNALS    
+      
+        # {2: None,
+        #  4: [],
+        #  5: [],
+        #  6: [],
+        #  'clicked': [],
+        #  'destroyed': [],
+        #  'entered': [],
+        #  'focused': [],
+        #  'left': [],
+        #  'toggled': []}
+
         self.update_selection()
 
-    def update_selection(self):
+    def update_selection(self, *args):
+        print args
+        
         radios = self.gig_widget.radios
         selection = [btn.text for btn in radios if btn.state == 2][0]
         self.selected = GIG_CHOICES[ selection ]
         self.changed = True
+        
+        print selection
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -148,7 +191,7 @@ def development():
 
     while gig_select.going:
         events = pygame.fastevent.get()
-        
+
         for event in events:
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -160,6 +203,8 @@ def development():
 
         if rects:
             pygame.display.update(rects)
-    
+        
+        # pygame.time.delay(15)
+        
 if __name__ == '__main__':
     development()
