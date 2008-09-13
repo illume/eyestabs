@@ -42,14 +42,14 @@ class GigWidget(Table):
 class GigSelect(Game):
     def __init__(self, screen, *args, **kw):
         Game.__init__(self, *args, **kw)
-        
+
         # Create the Renderer to use for the UI elements.
         self.re = Renderer ()
-        
+
         # Bind it to a part of the screen, which it will use to draw the widgets.
         # Here we use the complete screen.
         self.re.screen = screen
-        
+
         ################################################################
             
         ## Move to GigWidget
@@ -84,7 +84,6 @@ class GigSelect(Game):
 
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
-        
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
