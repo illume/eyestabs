@@ -506,8 +506,16 @@ ok, you can go from the doctors surgery to various places now.
 
 
 
+2008/09/14 09:22:06 AEST GMT +10
 
 
+- add sounds.
+
+- note guess updates...
+    - detect if the note played is in range
+    - show fails/passes on the screen
+    - update the Player class if you lose an eye
+    - go to gig_results screen.
 
 
 
