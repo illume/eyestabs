@@ -123,14 +123,16 @@ def main():
         try:
             intro_track = os.path.join("data", "intro.ogg")
             pygame.mixer.music.load(intro_track)
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(-1)
         except:
             print "failed playing music track: '%s'" % intro_track
 
     else:
         import numpy
-        mixer = pygame.mixer
+        pygame.sndarray.use_arraytype("numpy")
         
+        mixer = pygame.mixer
+
         def _array_samples(sound, raw):
             # Info is a (freq, format, stereo) tuple
             info = mixer.get_init ()
@@ -178,7 +180,6 @@ def main():
         intro_sound_big = pygame.sndarray.make_sound(intro_array)
 
         intro_sound_big.play()
-
 
 
     screen = pygame.display.set_mode(constants.SCREEN_SIZE)
