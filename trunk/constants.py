@@ -1,6 +1,8 @@
 import pygame
 
 PITCH_DETECT         = pygame.USEREVENT + 10
+VIDEO_PLAYER         = pygame.USEREVENT + 11
+
 
 FPS = 30
 SCREEN_SIZE = (640,480)

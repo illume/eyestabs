@@ -26,8 +26,16 @@ from noteguess import NoteGuess
 
 from gig_select import GigSelect
 
+from video_player import VideoPlayer
 
 import analyse_thread
+
+
+
+
+
+
+
 
 class Top(Game):
     def handle_events(self, events):
@@ -124,8 +132,9 @@ def main():
     # Add the intro as a child Game to the top Game.
     # intro = Intro(name ="eye stab intro")
     
-    intro = GigSelect(screen)
-    
+    #intro = GigSelect(screen)
+
+    intro = VideoPlayer()
     
     top.games.append(intro)
     top.intro = intro
