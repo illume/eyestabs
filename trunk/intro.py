@@ -54,7 +54,7 @@ class Intro(Game):
         rects = Game.draw(self, screen)
         the_text = self.font.render(self.text_string, 1, self.font_color)
 
-        screen.fill((0,0,0,255))
+        #screen.fill((0,0,0,255))
 
         # draw the text in the middle of the screen.
         x,text_y = screen.get_rect().center

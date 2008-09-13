@@ -186,11 +186,12 @@ def main():
     top.set_main()
     
     # Add the intro as a child Game to the top Game.
-    # intro = Intro(name ="eye stab intro")
+    intro = Intro(name ="eye stab intro")
     
     #intro = GigSelect(screen)
 
-    intro = VideoPlayer()
+    top.video_intro = VideoPlayer()
+    intro.games.append(top.video_intro)
     
     top.games.append(intro)
     top.intro = intro
@@ -229,16 +230,19 @@ def main():
 
         # remove empty rects.
         rects = filter(lambda x: x != [], rects)
+        #rects = filter(lambda x: type(x) not in map(type, [pygame.Rect, [], tuple([1,2])]) , rects)
+        rects = filter(lambda x: type(x) not in map(type, [1]) , rects)
 
         # if not empty, then update the display.
         if rects != []:
+            print rects
             pygame.display.update(rects)
         #pygame.display.update(rects)
         
         # we ask the clock to try and stay at a FPS rate( eg 30fps).
         #  It won't get exactly this, but it tries to get close.
         clock.tick(constants.FPS)
-        print clock.get_fps()
+        #print clock.get_fps()
 
 
     # we try and clean up explicitly, and more nicely... 
