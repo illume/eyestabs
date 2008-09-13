@@ -73,8 +73,11 @@ class Top(Game):
         if self.intro.going:
             self.intro.stop()
             # stop the intro music.
-            pygame.mixer.music.fadeout(100)
-            pygame.mixer.music.stop()
+            # pygame.mixer.music.fadeout(100)
+            # pygame.mixer.music.stop()
+            
+            self.intro.loop_ogg.fadeout(100)
+            self.intro.loop_ogg.stop()
 
             self.note_guess.load()
             self.note_guess.start()
@@ -185,18 +188,20 @@ def main():
         
         pygame.time.set_timer(constants.INTRO_FADEOUT, 31000)
         intro_sound_big.play()
-
+        
 
     screen = pygame.display.set_mode(constants.SCREEN_SIZE)
     
 
     top = Top(name = "Eye stabs.  Do you?")
     top.set_main()
-    
+
     # Add the intro as a child Game to the top Game.
     intro = Intro(name ="eye stab intro")
     
-    #intro = GigSelect(screen)
+    intro.loop_ogg = intro_sound_big
+
+    # intro = GigSelect(screen)
 
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
@@ -223,6 +228,7 @@ def main():
 
         if [e for e in events if e.type == constants.INTRO_FADEOUT]:
             intro_sound_big.fadeout(1000)
+            # intro_sound_big.stop()
 
         # we pass in the events so all of them can get the events.
         top.handle_events(events)

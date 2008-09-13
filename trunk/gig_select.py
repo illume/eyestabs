@@ -35,7 +35,7 @@ Game = game.Game
 GIG_CHOICES =    {    
     "Some\nGig"           :  "doctor_yellow2.jpg",
     "Some\nOther\nGig"    :  "love-parade.jpg",
-    "Some\nOTHER\nGig"    :  "love-parade.jpg",
+    "Some\nOTHER\nGig"    :  "eiffel-tower.jpg",
 }
 
 for gig, pic in GIG_CHOICES.items():
