@@ -21,7 +21,7 @@ from pygame.locals import *
 from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, RadioButton, Button
 
 
-from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT
+from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
 
 # USER LIBS
 
@@ -33,10 +33,10 @@ Game = game.Game
 ################################################################################
 
 GIG_CHOICES =    {    
-    "Dr StrangeLove"           :  "doctor_yellow2.jpg",
-    "Love is\nin the air"    :  "love-parade.jpg",
-    "Le Francoise"    :  "eiffel-tower.jpg",
-    "MOSH!!"              :  "moshing-punks.jpg",
+    "Dr StrangeLove"              :  "doctor_yellow2.jpg",
+    "Love is\nin the air"         :  "love-parade.jpg",
+    "Le Francoise"                :  "eiffel-tower.jpg",
+    "MOSH!!"                      :  "moshing-punks.jpg",
 }
 
 for gig, pic in GIG_CHOICES.items():
@@ -66,9 +66,9 @@ class GigWidget(object):
             radio_frame.add_child (btn)
 
         group.activate()
-        
+
         self.button = Button('SELECT GIG')
-        
+
         self.radios = group.list
 
         self.table.add_child(0, 0, radio_frame)
@@ -84,13 +84,21 @@ class GigSelect(Game):
         self.re.screen = screen
 
         self.gig_widget = GigWidget()
+        
+        self.gig_widget.button.connect_signal('clicked', self.stop)
+
+        for radio in self.gig_widget.radios:
+            radio.connect_signal('clicked', self.update_selection)
 
         self.re.add_widget( self.gig_widget.table )
+        
+        self.update_selection()
 
-    def selection(self):
+    def update_selection(self):
         radios = self.gig_widget.radios
-        selected = [btn.text for btn in radios if btn.state == 2]
-        if selected:  return GIG_CHOICES[selected[0]]
+        selection = [btn.text for btn in radios if btn.state == 2][0]
+        self.selected = GIG_CHOICES[ selection ]
+        self.changed = True
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -101,20 +109,22 @@ class GigSelect(Game):
                 break
 
         self.re.distribute_events (*events)
-        
+
         # TODO: WHERE SHOULD THIS GO?
-        if self.gig_widget.button.state == 2:
-            self.stop()
+        # if self.gig_widget.button.state == 2:
+            # self.stop()
 
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
-
-        # self.re.screen.fill ((234, 228, 223))
         
-        self.re.screen.blit(self.selection(), (0,0))
+        if self.changed:
+            # self.re.screen.fill ((234, 228, 223))
+            self.re.screen.blit(self.selected, (0,0))
+            self.changed = 0
+        
         self.re.refresh ()
 
         return rects
@@ -150,8 +160,6 @@ def development():
 
         if rects:
             pygame.display.update(rects)
-    
-    print gig_select.selection()
     
 if __name__ == '__main__':
     development()
