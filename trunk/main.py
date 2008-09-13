@@ -31,7 +31,7 @@ from video_player import VideoPlayer
 import analyse_thread
 
 
-
+import player
 
 
 
@@ -205,7 +205,11 @@ def main():
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
 
-    intro = GigSelect(screen)
+    #intro = GigSelect(screen)
+
+
+    # store the player object.
+    player.player = player.Play()
 
 
     top.games.append(intro)
