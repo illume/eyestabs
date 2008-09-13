@@ -35,8 +35,6 @@ import player
 
 
 
-
-
 class Top(Game):
     def handle_events(self, events):
         # handle our events first, then the childrens.
