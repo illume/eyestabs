@@ -364,13 +364,19 @@ I can't wait until we get SDL_ffmpeg working with pygame :)
 
 
 
+2008/09/13 18:52:23 AEST GMT +10
 
 
 
 
+2008/09/13 20:14:42 AEST GMT +10
 
 
+Getting closer to finishing video player...
 
+
+talked to nick about gig select screen... 
+we're going to come up with 6 gigs, with pictures and text.
 
 
 
