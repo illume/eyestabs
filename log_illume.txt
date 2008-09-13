@@ -441,11 +441,22 @@ arg!
     - doctor button.
 
 
-
 - note guess updates...
     - detect if the note played is in range
     - show fails/passes on the screen
     - update the Player class if you lose an eye
+
+
+
+
+2008/09/14 07:34:51 AEST GMT +10
+
+
+- when you click the fix eye option, 
+    - it should say 'eye has been fixed, thanks!'
+- gig button should go to a gig.
+
+
 
 
 

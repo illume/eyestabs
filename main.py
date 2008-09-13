@@ -28,6 +28,10 @@ from gig_select import GigSelect
 
 from video_player import VideoPlayer
 
+from eyefix_result import EyeFixResult
+
+
+
 import analyse_thread
 
 
@@ -51,9 +55,22 @@ class Top(Game):
 
         # this handles the childrens events amongst others.
         Game.handle_events(self, events)
+
     
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
+
+
+        print data.where_to
+        print self.gig_select.going
+        print self.games
+        if data.where_to == "gig_select":
+            self.stop_all()
+            self.gig_select.start()
+            data.where_to = ""
+        
+
+
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
@@ -62,10 +79,15 @@ class Top(Game):
 
 
 
+    def stop_all(self):
+        for g in self.games:
+            g.stop()
 
     def check_transition(self):
         """ See which part of the game we are at, and where we should go.
         """
+
+
         
         # which part of the game are we going into?
         if self.intro.going:
@@ -73,9 +95,9 @@ class Top(Game):
             # stop the intro music.
             # pygame.mixer.music.fadeout(100)
             # pygame.mixer.music.stop()
-            
-            self.intro.loop_ogg.fadeout(100)
-            self.intro.loop_ogg.stop()
+            if hasattr(self.intro, "loop_ogg"):
+                self.intro.loop_ogg.fadeout(100)
+                self.intro.loop_ogg.stop()
 
             self.note_guess.load()
             self.note_guess.start()
@@ -86,6 +108,8 @@ class Top(Game):
         else:
             print 'ok'
             self.stop()
+
+        
 
 
 
@@ -102,6 +126,8 @@ def main():
         analyse_play.main()
         return
 
+
+    data.where_to = ""
 
 
     #print "Hello from your game's main()"
@@ -203,16 +229,33 @@ def main():
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
 
-    # intro = GigSelect(screen)
+    top.gig_select = GigSelect(screen)
+    top.games.append(top.gig_select)
+    top.gig_select.stop()
+    #intro = top.gig_select
 
 
     # store the player object.
-    player.player = player.Player()
+    #player.player = player.Player()
+
+
+    top.eyefix = EyeFixResult()
+    top.games.append(top.eyefix)
+    #top.eyefix.stop()
+    intro = top.eyefix
+
+
 
 
     top.games.append(intro)
     top.intro = intro
+
     
+
+
+
+
+
     note_guess = NoteGuess(name="Eye stabs.    Note Guess")
 
     # stop the note_guess part, because we are not ready yet.
