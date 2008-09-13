@@ -212,7 +212,14 @@ class VideoPlayer(Game):
                 #pygame.transform.threshold(DestSurface, Surface, color, threshold = (0,0,0,0), diff_color = (0,0,0,0), change_return = True, Surface =None): return num_threshold_pixels
                 print self.current_surf.get_at((0,0))
                 arg = self.current_surf.copy()
-                pygame.transform.threshold(arg, self.current_surf, (255,255,255, 255), (45,45,45,25),  (0,0,min(self.elapsed_time * 30, 255),255))
+                pygame.transform.threshold(arg, 
+                                           self.current_surf, 
+                                           (255,255,255, 255), 
+                                           #(45,45,45,25),
+                                           #(15,15,15,15),
+                                           (5,5,5,5),
+                                           (0,0,min(self.elapsed_time * 30, 255),
+                                           255))
                 self.current_surf = arg
 
             elif self.elapsed_time > 6.5  and self.elapsed_time < 9.5:
