@@ -119,7 +119,7 @@ def main():
     analyse_thread.init()
 
     # start playing intro track, before the screen comes up.
-    if 0:
+    if 1:
         try:
             intro_track = os.path.join("data", "intro.ogg")
             pygame.mixer.music.load(intro_track)
