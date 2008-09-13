@@ -8,6 +8,8 @@ Has a bunch of methods to
 class Player:
     def __init__(self):
         self.eye_balls = 2
+        self.spare_eye_balls = 0
+
 
         # should we have different currencies?
         # What about bank accounts?
@@ -30,6 +32,34 @@ class Player:
         self.fake_online_friends['linkedin'] = 10
 
 
+    def get_stats_text(self):
+        """
+        """
+
+        s = """eye_balls:%s
+spare eye balls:%s
+cash: $%s
+fans:%s
+stalker_fans:%s
+psyco_stalkers:%s
+real_friends:%s
+fake_online_friends['facebook']:%s
+fake_online_friends['myspace']:%s
+fake_online_friends['friendster']:%s
+fake_online_friends['linkedin']:%s""" % (self.eye_balls,
+        self.spare_eye_balls,
+        self.cash,
+        self.fans,
+        self.stalker_fans,
+        self.psyco_stalkers,
+        self.real_friends,
+        self.fake_online_friends['facebook'],
+        self.fake_online_friends['myspace'],
+        self.fake_online_friends['friendster'],
+        self.fake_online_friends['linkedin'],
+        )
+        return s
+
 
 
     def be_stabbed(self):
@@ -44,7 +74,7 @@ class Player:
 
 
 
-
+player = Player()
 
 
 
