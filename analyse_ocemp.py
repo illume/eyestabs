@@ -58,20 +58,20 @@ def Paramaters(*params):
     paramaters = _Paramaters(len(params)*2, 1)
     paramaters.topleft = 5, 5
     paramaters.spacing = 5
-    
+
     for param in params: paramaters.add_paramater(*param)
-    
+
     return paramaters
 
 ################################################################################
 
 paramaters = Paramaters (
     ("minimum_volume",      -22,    -8,    -17),
-    
+
     ("attack_threshold",     0,     5,     2),
-    
+
     ("octave_correction",    -2,     2,     1,       int),
-    
+
     ("sample_size",          512,   4096,  1024,   lambda s: int((s//256)*256)),
 )
 
@@ -136,12 +136,12 @@ while True:
     
     if midi_note:
         midi_note += paramaters.octave_correction * 12
-    
-        latest_note = notes.midi_to_note(midi_note)       
+
+        latest_note = notes.midi_to_note(midi_note)
         latest_vol = analyse.loudness(samps)
-    
+
         attacked = latest_vol - last_vol > paramaters.attack_threshold
-    
+
         if latest_note != last_note or attacked:
             if latest_vol > paramaters.minimum_volume:
                 event = {'note':     latest_note,    'time':     t}
@@ -156,5 +156,4 @@ while True:
     print event
     sys.stdout.flush()
 
-    
 ################################################################################
