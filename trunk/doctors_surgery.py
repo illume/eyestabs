@@ -84,10 +84,8 @@ class DoctorWidget(object):
 
         self.stats = Label (player.player.get_stats_text())
         self.stats.multiline = True
-
-        self.table.align= ALIGN_LEFT
-        self.align= ALIGN_LEFT
         self.stats.align= ALIGN_LEFT
+
 
         self.table.add_child(0, 0, radio_frame)
         self.table.add_child(1, 0, self.button)
