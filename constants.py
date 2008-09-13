@@ -13,3 +13,4 @@ TIME_MS_TO_GET_NOTE = 200
 
 
 # other constants can go here!   yes indeed...
+INTRO_FADEOUT = pygame.USEREVENT + 2

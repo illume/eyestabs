@@ -170,15 +170,20 @@ def main():
         
         intro_track = os.path.join("data", "intro.ogg")
         intro_sound = pygame.mixer.Sound(intro_track)
+        
+        
         intro_array = _array_samples(intro_sound, 1)[:705600/2]
+
+        
 
         # assert len(intro_array) == 705600
 
-        for i in range(2):  # 4 x longer
+        for i in range(1):  # 4 x longer
             intro_array = numpy.append(intro_array, intro_array, 0)
 
         intro_sound_big = pygame.sndarray.make_sound(intro_array)
-
+        
+        pygame.time.set_timer(constants.INTRO_FADEOUT, 31000)
         intro_sound_big.play()
 
 
@@ -206,8 +211,6 @@ def main():
     top.games.append(note_guess)
     top.note_guess = note_guess
     
-    
-    
     clock = pygame.time.Clock()
     clock.tick()
     
@@ -217,6 +220,9 @@ def main():
             elapsed_time = elapsed_time / 1000.
 
         events = pygame.fastevent.get()
+
+        if [e for e in events if e.type == constants.INTRO_FADEOUT]:
+            intro_sound_big.fadeout(1000)
 
         # we pass in the events so all of them can get the events.
         top.handle_events(events)
