@@ -201,11 +201,13 @@ def main():
     
     intro.loop_ogg = intro_sound_big
 
-    # intro = GigSelect(screen)
 
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
-    
+
+    intro = GigSelect(screen)
+
+
     top.games.append(intro)
     top.intro = intro
     
