@@ -186,6 +186,7 @@ def main():
         # we ask the clock to try and stay at a FPS rate( eg 30fps).
         #  It won't get exactly this, but it tries to get close.
         clock.tick(constants.FPS)
+        print clock.get_fps()
 
 
     # we try and clean up explicitly, and more nicely... 
