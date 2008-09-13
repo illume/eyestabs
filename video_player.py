@@ -185,6 +185,7 @@ class VideoPlayer(Game):
             surfs[f] = s
 
 
+
         pygame.fastevent.post (
             pygame.event.Event(constants.VIDEO_PLAYER, surf_data = surfs)
         )
@@ -199,7 +200,23 @@ class VideoPlayer(Game):
 
 
         if self.last_surf != self.current_surf:
-            r = screen.blit(self.current_surf, (0,0))
+            #screen.fill((245, 255,255), screen.get_rect(),  BLEND_ADD)
+
+            if self.elapsed_time > 3.0 and self.elapsed_time < 6.5:
+                pygame.transform.laplacian(self.current_surf, self.current_surf)
+                if self.elapsed_time > 3.5:
+                    pygame.transform.laplacian(self.current_surf, self.current_surf)
+                if self.elapsed_time > 4.5:
+                    pygame.transform.laplacian(self.current_surf, self.current_surf)
+            elif self.elapsed_time > 6.5  and self.elapsed_time < 9.5:
+                screen.fill((45, 0,0), screen.get_rect(),  BLEND_ADD)
+                pass
+
+
+            pygame.transform.smoothscale(self.current_surf, screen.get_size(), screen)
+
+            r = screen.get_rect()
+            #r = screen.blit(self.current_surf, (0,0))
             rects.append(r)
         # update the whole screen.
         #rects.extend(screen.get_rect())
