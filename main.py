@@ -112,6 +112,10 @@ def main():
     pygame.init()
     pygame.fastevent.init()
 
+    pygame.threads.init(4)
+
+
+
     analyse_thread.init()
 
     # start playing intro track, before the screen comes up.
@@ -187,7 +191,10 @@ def main():
     # we try and clean up explicitly, and more nicely... 
     #    rather than hoping python will clean up correctly for us.
     pygame.quit()
+
     
+    pygame.threads.quit()
+
     analyse_thread.quit()
 
 
