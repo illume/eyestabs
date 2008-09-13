@@ -18,8 +18,8 @@ import sys
 import pygame
 from pygame.locals import *
 
-from ocempgui.widgets import Renderer, Table, HScale, Label
-from ocempgui.widgets.Constants import SIG_VALCHANGED
+from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, RadioButton
+from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT
 
 # USER LIBS
 
@@ -30,27 +30,42 @@ Game = game.Game
 
 ################################################################################
 
-def _update_parameter(scale, label):
-    label.text = "Value: %f" % scale.value
+GIG_CHOICES =    {
+    "Some\nGig"           :  "GIG_OBJECT",
+    "Some\nOther\nGig"    :  "GIG_OBJECT",
+    "Some\nOTHER\nGig"    :  "GIG_OBJECT",
+}
 
+################################################################################
+
+def create_vframe (text):
+    frame = VFrame (Label (text))
+    frame.spacing = 5
+    frame.align = ALIGN_LEFT
+    return frame
+
+def update_parameter(scale, label):
+    label.text = "Value: %f" % scale.value
 
 class GigWidget(object):
     def __init__(self):
-        self.table = Table(2, 1)
+        self.table = Table(1, 1)
+        radio_frame = create_vframe('Select A Gig')
 
-        self.scale = HScale(0, 20)
-        self.scale.value = 5
-        label = Label ("Value: %f" % self.scale.value)
+        group = None
+        for i, s in enumerate(sorted(GIG_CHOICES.keys())):
+            print s
 
-        self.scale.connect_signal (
-            SIG_VALCHANGED, _update_parameter, self.scale, label
-        )
+            btn = RadioButton (s, group)
+            if i == 0:
+                group = btn
 
-        self.table.topleft = 5, 5
-        self.table.spacing = 5
+            btn.child.multiline = True
+            radio_frame.add_child (btn)
 
-        self.table.add_child(0, 0, self.scale)
-        self.table.add_child(1, 0, label)
+        self.buttons = group.list
+
+        self.table.add_child(0, 0, radio_frame)
 
 ################################################################################
 
@@ -68,8 +83,6 @@ class GigSelect(Game):
         self.gig_widget = GigWidget()
 
         self.re.add_widget( self.gig_widget.table )
-
-    fans = property(lambda self: self.gig_widget.scale.value)
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -107,6 +120,7 @@ def development():
     screen = pygame.display.set_mode((640, 400))
 
     gig_select = GigSelect(screen)
+    prev_selected = None
 
     while True:
         events = pygame.fastevent.get()
@@ -114,16 +128,23 @@ def development():
         for event in events:
             if event.type == pygame.QUIT:
                 sys.exit()
-        
+
         gig_select.update(3)
-        
+
         gig_select.handle_events(events)
         rects = [l for l in gig_select.draw(screen) if l]
 
         if rects:
             pygame.display.update(rects)
-            
-        print gig_select.fans
-        
+
+        buttons = gig_select.gig_widget.buttons
+        selected = [btn.text for btn in buttons if btn.state == 2]
+
+        if selected:
+            if selected != prev_selected:
+                print selected
+
+            prev_selected = selected
+
 if __name__ == '__main__':
     development()
