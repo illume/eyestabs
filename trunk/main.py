@@ -123,21 +123,58 @@ def main():
         try:
             intro_track = os.path.join("data", "intro.ogg")
             pygame.mixer.music.load(intro_track)
-            pygame.mixer.music.play(-1)
+            pygame.mixer.music.play()
         except:
             print "failed playing music track: '%s'" % intro_track
 
     else:
+        import numpy
+        mixer = pygame.mixer
+        
+        def _array_samples(sound, raw):
+            # Info is a (freq, format, stereo) tuple
+            info = mixer.get_init ()
+            if not info:
+                raise pygame.error, "Mixer not initialized"
+            fmtbytes = (abs (info[1]) & 0xff) >> 3
+            channels = info[2]
+            if raw:
+                data = sound.get_buffer ().raw
+            else:
+                data = sound.get_buffer ()
+        
+            shape = (len (data) / (channels * fmtbytes), )
+            if channels > 1:
+                shape = (shape[0], 2)
+
+            # mixer.init () does not support different formats from the ones below,
+            # so MSB/LSB stuff is silently ignored.
+            typecode = { 8 : numpy.uint8,   # AUDIO_U8
+                         16 : numpy.uint16, # AUDIO_U16 / AUDIO_U16SYS
+                         -8 : numpy.int8,   # AUDIO_S8
+                         -16 : numpy.int16  # AUDUI_S16 / AUDIO_S16SYS
+                         }[info[1]]
+
+            print channels
+            print fmtbytes
+            print typecode
+            
+            array = numpy.fromstring (data, typecode)
+            print array.shape
+            print shape
+            
+            array.shape = shape
+            return array
+        
         intro_track = os.path.join("data", "intro.ogg")
         intro_sound = pygame.mixer.Sound(intro_track)
+        intro_array = _array_samples(intro_sound, 1)
+        
+        for i in range(2):  # 4 x longer
+            intro_array = numpy.append(intro_array, intro_array, 0)
 
-        import numpy
-        pygame.sndarray.use_arraytype("numpy")
-
-        intro_array = pygame.sndarray.array(intro_sound)
-        intro_array = numpy.append(intro_array, intro_array[:])
         intro_sound_big = pygame.sndarray.make_sound(intro_array)
-        print intro_sound_big
+
         intro_sound_big.play()
 
 

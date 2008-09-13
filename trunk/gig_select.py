@@ -61,6 +61,7 @@ class GigWidget(object):
             btn.child.multiline = True
             radio_frame.add_child (btn)
 
+        group.activate()
         
         self.button = Button('SELECT GIG')
         
