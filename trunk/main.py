@@ -205,7 +205,7 @@ def main():
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
 
-    #intro = GigSelect(screen)
+    # intro = GigSelect(screen)
 
 
     # store the player object.
