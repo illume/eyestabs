@@ -67,6 +67,12 @@ class Top(Game):
             print self.games
 
 
+        if data.where_to == "intro":
+            self.stop_all()
+            self.intro.start()
+            data.where_to = ""
+
+
         if data.where_to == "gig_select":
             self.stop_all()
             self.gig_select.start()
@@ -123,6 +129,7 @@ class Top(Game):
 
         elif self.note_guess.going:
             self.note_guess.stop()
+            data.where_to = "gig_select"
         else:
             print 'ok'
             self.stop()
