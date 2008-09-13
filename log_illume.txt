@@ -432,4 +432,24 @@ arg!
 
 
 
+- doctor screen.
+    - fix eye button.
+    - show stats ($, spare eyes etc)
+    - gig button.
+
+- gig select updates.
+    - doctor button.
+
+
+
+- note guess updates...
+    - detect if the note played is in range
+    - show fails/passes on the screen
+    - update the Player class if you lose an eye
+
+
+
+
+
+
 

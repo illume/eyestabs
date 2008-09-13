@@ -29,6 +29,8 @@ from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
 
 import constants
 import game
+import player
+
 
 Game = game.Game
 
@@ -58,7 +60,7 @@ def create_vframe (text):
 
 class DoctorWidget(object):
     def __init__(self):
-        self.table = Table(2, 1)
+        self.table = Table(3, 1)
 
         radio_frame = create_vframe('Select A Gig')
 
@@ -79,8 +81,20 @@ class DoctorWidget(object):
 
         self.radios = group.list
 
+
+        self.stats = Label (player.player.get_stats_text())
+        self.stats.multiline = True
+
+        self.table.align= ALIGN_LEFT
+        self.align= ALIGN_LEFT
+        self.stats.align= ALIGN_LEFT
+
         self.table.add_child(0, 0, radio_frame)
         self.table.add_child(1, 0, self.button)
+        self.table.add_child(2, 0, self.stats)
+
+
+
 
 
         # doesn't work for some reason...
