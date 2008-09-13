@@ -311,6 +311,15 @@ drew the 'allowed error' markers.
 
 
 
+2008/09/13 14:34:48 AEST GMT +10
+
+
+
+- detect if the note played is in range
+- show fails/passes on the screen
+- update the Player class if you lose an eye
+
+
 
 
 
