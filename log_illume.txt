@@ -330,3 +330,50 @@ Made a doctor image... and got myself a V.
 
 
 
+2008/09/13 18:12:46 AEST GMT +10
+
+We have ocempgui in the same directory as the game now.
+
+Spent ages fucking around with a video we want to include... pygame.movie SUCKS!!!
+
+
+I'm not sure what the secret is to encode video for it so that it works...
+
+It kind of can be done... but not really.
+
+
+- make video player that uses jpegs.
+
+
+Tried to make a video strip of the video... but it killed my poor vista laptop.
+
+
+
+Should I bother with this still?   YES!  I have to now... it's taken ages.
+
+I can't wait until we get SDL_ffmpeg working with pygame :)
+
+
+
+
+
+
+
+2008/09/13 18:44:51 AEST GMT +10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
