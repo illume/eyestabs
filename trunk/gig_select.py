@@ -33,10 +33,25 @@ Game = game.Game
 def _update_parameter(scale, label):
     label.text = "Value: %f" % scale.value
 
-class GigWidget(Table):
-    def __init__(self, *args, **kw):
-        Table.__init__(self, *args, **kw)
-    
+
+class GigWidget(object):
+    def __init__(self):
+        self.table = Table(2, 1)
+
+        self.scale = HScale(0, 20)
+        self.scale.value = 5
+        label = Label ("Value: %f" % self.scale.value)
+
+        self.scale.connect_signal (
+            SIG_VALCHANGED, _update_parameter, self.scale, label
+        )
+
+        self.table.topleft = 5, 5
+        self.table.spacing = 5
+
+        self.table.add_child(0, 0, self.scale)
+        self.table.add_child(1, 0, label)
+
 ################################################################################
 
 class GigSelect(Game):
@@ -50,27 +65,11 @@ class GigSelect(Game):
         # Here we use the complete screen.
         self.re.screen = screen
 
-        ################################################################
-            
-        ## Move to GigWidget
-            
-        table = Table(2, 1)
+        self.gig_widget = GigWidget()
 
-        scale = HScale(0, 20)
-        scale.value = 5
-        label = Label ("Value: %f" % scale.value)
+        self.re.add_widget( self.gig_widget.table )
 
-        scale.connect_signal(SIG_VALCHANGED, _update_parameter, scale, label)
-
-        table.topleft = 5, 5
-        table.spacing = 5
-
-        table.add_child(0, 0, scale)
-        table.add_child(1, 0, label)
-        
-        ################################################################
-        
-        self.re.add_widget( table )
+    fans = property(lambda self: self.gig_widget.scale.value)
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -123,6 +122,8 @@ def development():
 
         if rects:
             pygame.display.update(rects)
+            
+        print gig_select.fans
         
 if __name__ == '__main__':
     development()
