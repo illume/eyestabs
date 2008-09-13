@@ -18,7 +18,9 @@ import sys
 import pygame
 from pygame.locals import *
 
-from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, RadioButton
+from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, RadioButton, Button
+
+
 from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT
 
 # USER LIBS
@@ -31,9 +33,9 @@ Game = game.Game
 ################################################################################
 
 GIG_CHOICES =    {
-    "Some\nGig"           :  "GIG_OBJECT",
-    "Some\nOther\nGig"    :  "GIG_OBJECT",
-    "Some\nOTHER\nGig"    :  "GIG_OBJECT",
+    "Some\nGig"           :  "GIG_OBJECT1",
+    "Some\nOther\nGig"    :  "GIG_OBJECT2",
+    "Some\nOTHER\nGig"    :  "GIG_OBJECT3",
 }
 
 ################################################################################
@@ -44,17 +46,13 @@ def create_vframe (text):
     frame.align = ALIGN_LEFT
     return frame
 
-def update_parameter(scale, label):
-    label.text = "Value: %f" % scale.value
-
 class GigWidget(object):
     def __init__(self):
-        self.table = Table(1, 1)
+        self.table = Table(2, 1)
         radio_frame = create_vframe('Select A Gig')
 
         group = None
         for i, s in enumerate(sorted(GIG_CHOICES.keys())):
-            print s
 
             btn = RadioButton (s, group)
             if i == 0:
@@ -63,9 +61,13 @@ class GigWidget(object):
             btn.child.multiline = True
             radio_frame.add_child (btn)
 
-        self.buttons = group.list
+        
+        self.button = Button('SELECT GIG')
+        
+        self.radios = group.list
 
         self.table.add_child(0, 0, radio_frame)
+        self.table.add_child(1, 0, self.button)
 
 ################################################################################
 
@@ -73,16 +75,17 @@ class GigSelect(Game):
     def __init__(self, screen, *args, **kw):
         Game.__init__(self, *args, **kw)
 
-        # Create the Renderer to use for the UI elements.
         self.re = Renderer ()
-
-        # Bind it to a part of the screen, which it will use to draw the widgets.
-        # Here we use the complete screen.
         self.re.screen = screen
 
         self.gig_widget = GigWidget()
 
         self.re.add_widget( self.gig_widget.table )
+
+    def selection(self):
+        radios = self.gig_widget.radios
+        selected = [btn.text for btn in radios if btn.state == 2]
+        if selected:  return GIG_CHOICES[selected[0]]
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -93,6 +96,10 @@ class GigSelect(Game):
                 break
 
         self.re.distribute_events (*events)
+        
+        # TODO: WHERE SHOULD THIS GO?
+        if self.gig_widget.button.state == 2:
+            self.stop()
 
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
@@ -122,7 +129,7 @@ def development():
     gig_select = GigSelect(screen)
     prev_selected = None
 
-    while True:
+    while gig_select.going:
         events = pygame.fastevent.get()
         
         for event in events:
@@ -136,15 +143,8 @@ def development():
 
         if rects:
             pygame.display.update(rects)
-
-        buttons = gig_select.gig_widget.buttons
-        selected = [btn.text for btn in buttons if btn.state == 2]
-
-        if selected:
-            if selected != prev_selected:
-                print selected
-
-            prev_selected = selected
-
+    
+    print gig_select.selection()
+    
 if __name__ == '__main__':
     development()
