@@ -119,12 +119,27 @@ def main():
     analyse_thread.init()
 
     # start playing intro track, before the screen comes up.
-    try:
+    if 0:
+        try:
+            intro_track = os.path.join("data", "intro.ogg")
+            pygame.mixer.music.load(intro_track)
+            pygame.mixer.music.play(-1)
+        except:
+            print "failed playing music track: '%s'" % intro_track
+
+    else:
         intro_track = os.path.join("data", "intro.ogg")
-        pygame.mixer.music.load(intro_track)
-        pygame.mixer.music.play(-1)
-    except:
-        print "failed playing music track: '%s'" % intro_track
+        intro_sound = pygame.mixer.Sound(intro_track)
+
+        import numpy
+        pygame.sndarray.use_arraytype("numpy")
+
+        intro_array = pygame.sndarray.array(intro_sound)
+        intro_array = numpy.append(intro_array, intro_array[:])
+        intro_sound_big = pygame.sndarray.make_sound(intro_array)
+        print intro_sound_big
+        intro_sound_big.play()
+
 
 
     screen = pygame.display.set_mode(constants.SCREEN_SIZE)

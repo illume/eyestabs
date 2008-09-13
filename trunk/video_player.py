@@ -204,10 +204,10 @@ class VideoPlayer(Game):
 
             if self.elapsed_time > 3.0 and self.elapsed_time < 6.5:
                 pygame.transform.laplacian(self.current_surf, self.current_surf)
-                if self.elapsed_time > 3.5:
-                    pygame.transform.laplacian(self.current_surf, self.current_surf)
-                if self.elapsed_time > 4.5:
-                    pygame.transform.laplacian(self.current_surf, self.current_surf)
+                #if self.elapsed_time > 3.5:
+                #    pygame.transform.laplacian(self.current_surf, self.current_surf)
+                #if self.elapsed_time > 4.5:
+                #    pygame.transform.laplacian(self.current_surf, self.current_surf)
 
                 #pygame.transform.threshold(DestSurface, Surface, color, threshold = (0,0,0,0), diff_color = (0,0,0,0), change_return = True, Surface =None): return num_threshold_pixels
                 print self.current_surf.get_at((0,0))
