@@ -212,6 +212,7 @@ class GigSelect(Game):
         self.going = True
         self.changed = True
         self.re.refresh ()
+        self.elapsed_time = 0.0
 
 
 

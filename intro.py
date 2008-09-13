@@ -45,7 +45,8 @@ class Intro(Game):
         elif self.elapsed_time >= 8.0 and self.elapsed_time < 20.0:
             pass
         elif self.elapsed_time >= 10.0 and self.elapsed_time < 800.0:
-            self.stop()
+            #self.stop()
+            data.where_to = "gig_select"
 
 
 
@@ -97,7 +98,6 @@ class Intro(Game):
         self.going = False
 
         data.where_to = "gig_select"
-
 
 
 

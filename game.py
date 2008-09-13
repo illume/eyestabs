@@ -77,6 +77,7 @@ class Game(object):
         self.going = False
     def start(self):
         self.going = True
+        self.elapsed_time = 0.0
 
 
     def load(self):

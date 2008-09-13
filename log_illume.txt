@@ -498,6 +498,16 @@ got it going to doctors surgery... finally.
     - update the Player class if you lose an eye
 
 
+2008/09/14 09:07:31 AEST GMT +10
+
+ok, you can go from the doctors surgery to various places now.
+
+
+
+
+
+
+
 
 
 

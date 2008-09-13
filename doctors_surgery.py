@@ -38,7 +38,7 @@ Game = game.Game
 
 DOCTOR_CHOICES =    {    
     "Fix my eye"              :  "doctor_yellow2.jpg",
-    "Leave doctors surgery"         :  "love-parade.jpg",
+    "Leave doctors surgery"         :  "doctor_yellow2.jpg",
 }
 
 for gig, pic in DOCTOR_CHOICES.items():
@@ -238,6 +238,7 @@ class DoctorsSurgery(Game):
         self.going = True
         self.changed = True
         self.re.refresh ()
+        self.elapsed_time = 0.0
 
 
 
