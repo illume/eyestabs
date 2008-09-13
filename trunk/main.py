@@ -68,7 +68,10 @@ class Top(Game):
             self.stop_all()
             self.gig_select.start()
             data.where_to = ""
-        
+        if data.where_to == "note_guess":
+            self.stop_all()
+            self.note_guess.start()
+            data.where_to = ""
 
 
 
@@ -229,7 +232,7 @@ def main():
     top.video_intro = VideoPlayer()
     intro.games.append(top.video_intro)
 
-    top.gig_select = GigSelect(screen)
+    top.gig_select = GigSelect(screen.copy())
     top.games.append(top.gig_select)
     top.gig_select.stop()
     #intro = top.gig_select
@@ -241,8 +244,8 @@ def main():
 
     top.eyefix = EyeFixResult()
     top.games.append(top.eyefix)
-    #top.eyefix.stop()
-    intro = top.eyefix
+    top.eyefix.stop()
+    #intro = top.eyefix
 
 
 

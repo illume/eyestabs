@@ -26,7 +26,7 @@ from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
 
 # USER LIBS
 
-import constants
+import constants, data
 import game
 
 Game = game.Game
@@ -86,7 +86,7 @@ class GigSelect(Game):
 
         self.gig_widget = GigWidget()
 
-        self.gig_widget.button.connect_signal('clicked', self.stop)
+        self.gig_widget.button.connect_signal('clicked', self.done_it)
 
         for radio in self.gig_widget.radios:
             radio.connect_signal('toggled', self.update_selection)
@@ -133,6 +133,14 @@ class GigSelect(Game):
 
         self.update_selection()
 
+    def done_it(self):
+        """ we have selected a gig.
+        """
+
+        data.where_to = "note_guess"
+
+
+
     def update_selection(self, *args):
         print args
         
@@ -163,6 +171,7 @@ class GigSelect(Game):
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
+        self.re.screen = screen
         
         if self.changed:
             # self.re.screen.fill ((234, 228, 223))
