@@ -381,5 +381,25 @@ we're going to come up with 6 gigs, with pictures and text.
 
 
 
+2008/09/13 22:10:36 AEST GMT +10
+
+got video player working.
+
+
+
+2008/09/13 23:01:08 AEST GMT +10
+
+Drank some wine with a friend who popped by.
+
+
+
+
+- detect if the note played is in range
+- show fails/passes on the screen
+- update the Player class if you lose an eye
+
+
+
+
 
 
