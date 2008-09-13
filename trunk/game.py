@@ -17,7 +17,6 @@ from pygame.locals import *
 
 
 class Game(object):
-    
     def __init__(self, going = True, games = None, name = "", elapsed_time = 0.0):
         """ 
             going - if this is going.

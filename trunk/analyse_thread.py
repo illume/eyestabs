@@ -20,8 +20,6 @@ import pygame.event as event
 import notes
 import timing
 
-
-
 from constants import *
 
 ################################################################################

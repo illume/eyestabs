@@ -24,6 +24,9 @@ from intro import Intro
 #    Or playing your guitar.
 from noteguess import NoteGuess
 
+from gig_select import GigSelect
+
+
 import analyse_thread
 
 class Top(Game):
@@ -100,9 +103,9 @@ def main():
 
     pygame.init()
     pygame.fastevent.init()
-    
+
     analyse_thread.init()
-    
+
     # start playing intro track, before the screen comes up.
     try:
         intro_track = os.path.join("data", "intro.ogg")
@@ -119,7 +122,10 @@ def main():
     top.set_main()
     
     # Add the intro as a child Game to the top Game.
-    intro = Intro(name ="eye stab intro")
+    # intro = Intro(name ="eye stab intro")
+    
+    intro = GigSelect(screen)
+    
     
     top.games.append(intro)
     top.intro = intro
@@ -155,10 +161,10 @@ def main():
         # the draw method retunrns a list of rects, 
         #   for where the screen needs to be updated.
         rects = top.draw(screen)
-        
+
         # remove empty rects.
         rects = filter(lambda x: x != [], rects)
-        
+
         # if not empty, then update the display.
         if rects != []:
             pygame.display.update(rects)
