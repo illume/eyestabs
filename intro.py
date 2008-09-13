@@ -96,6 +96,9 @@ class Intro(Game):
         print 'intro stopped'
         self.going = False
 
+        data.where_to = "gig_select"
+
+
 
 
 
