@@ -80,6 +80,14 @@ class Top(Game):
             self.doctors_surgery.start()
             data.where_to = ""
 
+        if data.where_to == "eyefix":
+            print 'eye fix1!!!'
+            self.stop_all()
+            self.eyefix.choose_result()
+            self.eyefix.start()
+            data.where_to = ""
+
+
 
 
     def draw(self, screen):

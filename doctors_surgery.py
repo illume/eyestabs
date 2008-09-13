@@ -27,7 +27,7 @@ from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
 
 # USER LIBS
 
-import constants
+import constants, data
 import game
 import player
 
@@ -62,7 +62,7 @@ class DoctorWidget(object):
     def __init__(self):
         self.table = Table(3, 1)
 
-        radio_frame = create_vframe('Select A Gig')
+        radio_frame = create_vframe('Hi there...\nWhat do you want?')
 
 
         group = None
@@ -77,7 +77,7 @@ class DoctorWidget(object):
 
         group.activate()
 
-        self.button = Button('SELECT GIG')
+        self.button = Button('Tell doctor')
 
         self.radios = group.list
 
@@ -118,7 +118,7 @@ class DoctorsSurgery(Game):
         self.doctor_widget = DoctorWidget()
 
 
-        self.doctor_widget.button.connect_signal('clicked', self.stop)
+        self.doctor_widget.button.connect_signal('clicked', self.doit)
 
         for radio in self.doctor_widget.radios:
             radio.connect_signal('toggled', self.update_selection)
@@ -164,6 +164,22 @@ class DoctorsSurgery(Game):
         #  'toggled': []}
 
         self.update_selection()
+
+
+
+
+    def doit(self):
+        radios = self.doctor_widget.radios
+
+        selection = [btn.text for btn in radios if btn.state == 2][0]
+
+        if selection == "Fix my eye":
+            data.where_to = 'eyefix'
+        if selection == "Leave doctors surgery":
+            data.where_to = 'gig_select'
+
+
+
 
     def update_selection(self, *args):
         print args
