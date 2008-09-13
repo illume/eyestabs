@@ -144,11 +144,12 @@ class GigSelect(Game):
         print selection
 
     def handle_events(self, events):
+
         Game.handle_events(self, events)
 
         for e in events:
             if e.type == KEYDOWN and e.key == K_ESCAPE:
-                self.stop()
+                #self.stop()
                 break
 
         self.re.distribute_events (*events)
@@ -170,6 +171,10 @@ class GigSelect(Game):
         
         self.re.refresh ()
 
+
+        # update the whole screen.
+        #rects.extend([screen.get_rect()])
+
         return rects
 
     def stop(self):
@@ -177,6 +182,16 @@ class GigSelect(Game):
         """
         print 'gig_select stopped'
         self.going = False
+
+    def start(self):
+        """
+        """
+        print 'gig_select started'
+        self.going = True
+        self.changed = True
+        self.re.refresh ()
+
+
 
 ################################################################################
 
