@@ -194,6 +194,7 @@ class DoctorsSurgery(Game):
 
     def draw(self, screen):
         rects = Game.draw(self, screen)
+        self.re.screen = screen
         
         if self.changed:
             # self.re.screen.fill ((234, 228, 223))
@@ -201,6 +202,9 @@ class DoctorsSurgery(Game):
             self.changed = 0
         
         self.re.refresh ()
+
+        #rects.extend([screen.get_rect()])
+
 
         return rects
 
@@ -211,6 +215,13 @@ class DoctorsSurgery(Game):
         self.going = False
 
 
+    def start(self):
+        """
+        """
+        print 'doctors_surgery started'
+        self.going = True
+        self.changed = True
+        self.re.refresh ()
 
 
 
