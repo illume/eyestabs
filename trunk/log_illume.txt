@@ -458,8 +458,21 @@ arg!
 
 
 
+2008/09/14 08:27:05 AEST GMT +10
+
+Got the game moving between sections now.
 
 
+
+
+- gig select updates.
+    - doctor button.
+
+
+- note guess updates...
+    - detect if the note played is in range
+    - show fails/passes on the screen
+    - update the Player class if you lose an eye
 
 
 

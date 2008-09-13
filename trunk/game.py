@@ -43,11 +43,11 @@ class Game(object):
         for g in self.games:
             if g.going:
                 g.handle_events(events)
-                print "handling..."
-                print g
-
+                #print "handling..."
+                #print g
             else:
-                print g
+                pass
+                #print g
 
     def update(self, elapsed_time):
         # update the internal elapsed_time counter.

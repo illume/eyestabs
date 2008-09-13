@@ -30,7 +30,7 @@ from video_player import VideoPlayer
 
 from eyefix_result import EyeFixResult
 
-
+from doctors_surgery import DoctorsSurgery
 
 import analyse_thread
 
@@ -61,9 +61,12 @@ class Top(Game):
         Game.update(self, elapsed_time)
 
 
-        print data.where_to
-        print self.gig_select.going
-        print self.games
+        if 0:
+            print data.where_to
+            print self.gig_select.going
+            print self.games
+
+
         if data.where_to == "gig_select":
             self.stop_all()
             self.gig_select.start()
@@ -71,6 +74,10 @@ class Top(Game):
         if data.where_to == "note_guess":
             self.stop_all()
             self.note_guess.start()
+            data.where_to = ""
+        if data.where_to == "doctors_surgery":
+            self.stop_all()
+            self.doctors_surgery.start()
             data.where_to = ""
 
 
@@ -247,6 +254,9 @@ def main():
     top.eyefix.stop()
     #intro = top.eyefix
 
+    top.doctors_surgery = DoctorsSurgery(screen.copy())
+    top.games.append(top.doctors_surgery)
+    top.doctors_surgery.stop()
 
 
 

@@ -34,10 +34,10 @@ Game = game.Game
 ################################################################################
 
 GIG_CHOICES =    {    
-    "Dr StrangeLove"              :  "doctor_yellow2.jpg",
-    "Love is\nin the air"         :  "love-parade.jpg",
-    "Le Francoise"                :  "eiffel-tower.jpg",
-    "MOSH!!"                      :  "moshing-punks.jpg",
+#    "Dr StrangeLove"              :  "doctor_yellow2.jpg",
+    "3) Berlin love parade"         :  "love-parade.jpg",
+    "2) Play on top of\nthe eiffel tower"                :  "eiffel-tower.jpg",
+    "1) Secret London\npunk gig"                      :  "moshing-punks.jpg",
 }
 
 for gig, pic in GIG_CHOICES.items():
@@ -53,7 +53,7 @@ def create_vframe (text):
 
 class GigWidget(object):
     def __init__(self):
-        self.table = Table(2, 1)
+        self.table = Table(3, 1)
         radio_frame = create_vframe('Select A Gig')
 
         group = None
@@ -70,10 +70,15 @@ class GigWidget(object):
 
         self.button = Button('SELECT GIG')
 
+        self.doctor_button = Button('Go to Doctors surgery')
+
+
+
         self.radios = group.list
 
         self.table.add_child(0, 0, radio_frame)
         self.table.add_child(1, 0, self.button)
+        self.table.add_child(2, 0, self.doctor_button)
 
 ################################################################################
 
@@ -87,6 +92,7 @@ class GigSelect(Game):
         self.gig_widget = GigWidget()
 
         self.gig_widget.button.connect_signal('clicked', self.done_it)
+        self.gig_widget.doctor_button.connect_signal('clicked', self.go_doctor)
 
         for radio in self.gig_widget.radios:
             radio.connect_signal('toggled', self.update_selection)
@@ -138,6 +144,13 @@ class GigSelect(Game):
         """
 
         data.where_to = "note_guess"
+
+    def go_doctor(self):
+        """
+        """
+
+        data.where_to = "doctors_surgery"
+        print "asdf"
 
 
 
