@@ -23,7 +23,7 @@ from pygame.locals import *
 from ocempgui.widgets import Renderer, Table, HScale, Label, VFrame, \
                              RadioButton, Button
 
-from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED
+from ocempgui.widgets.Constants import SIG_VALCHANGED, ALIGN_LEFT, SIG_ACTIVATED, ALIGN_RIGHT
 
 # USER LIBS
 
@@ -50,12 +50,18 @@ def create_vframe (text):
     frame = VFrame (Label (text))
     frame.spacing = 5
     frame.align = ALIGN_LEFT
+    #frame.align = ALIGN_RIGHT
+    #frame.set_align (ALIGN_RIGHT)
+
+
     return frame
 
 class DoctorWidget(object):
     def __init__(self):
         self.table = Table(2, 1)
+
         radio_frame = create_vframe('Select A Gig')
+
 
         group = None
         for i, s in enumerate(sorted(DOCTOR_CHOICES.keys())):
@@ -76,6 +82,17 @@ class DoctorWidget(object):
         self.table.add_child(0, 0, radio_frame)
         self.table.add_child(1, 0, self.button)
 
+
+        # doesn't work for some reason...
+        if 0:
+            group.topleft = (640 - self.table.width,0)
+            radio_frame.topleft = (640 - self.table.width,0)
+            self.table.topleft = (640 - self.table.width,0)
+
+
+
+
+
 ################################################################################
 
 class DoctorsSurgery(Game):
@@ -85,7 +102,9 @@ class DoctorsSurgery(Game):
         self.re = Renderer ()
         self.re.screen = screen
 
+
         self.doctor_widget = DoctorWidget()
+
 
         self.doctor_widget.button.connect_signal('clicked', self.stop)
 

@@ -422,10 +422,12 @@ Drank some wine with a friend who popped by.
 
 
 
+2008/09/14 07:19:52 AEST GMT +10
+
+wasted time trying to get ocempgui widget to move to the right of the screen.
 
 
-
-
+arg!
 
 
 
