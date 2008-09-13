@@ -448,4 +448,5 @@ SIG_LEAVE =          intern ("left")
 
 # The default data directory, where the themes and co. get installed.
 # C:\python25\share\ocempgui will be replaced at installation usually.
-DEFAULTDATADIR = "C:\python25\share\ocempgui"
+#DEFAULTDATADIR = "C:\python25\share\ocempgui"
+DEFAULTDATADIR = ""
