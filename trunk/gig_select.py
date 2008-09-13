@@ -32,11 +32,14 @@ Game = game.Game
 
 ################################################################################
 
-GIG_CHOICES =    {
-    "Some\nGig"           :  "GIG_OBJECT1",
-    "Some\nOther\nGig"    :  "GIG_OBJECT2",
-    "Some\nOTHER\nGig"    :  "GIG_OBJECT3",
+GIG_CHOICES =    {    
+    "Some\nGig"           :  "doctor_yellow2.jpg",
+    "Some\nOther\nGig"    :  "love-parade.jpg",
+    "Some\nOTHER\nGig"    :  "love-parade.jpg",
 }
+
+for gig, pic in GIG_CHOICES.items():
+    GIG_CHOICES[gig] = pygame.image.load(os.path.join("data", "images", pic))
 
 ################################################################################
 
@@ -75,8 +78,6 @@ class GigWidget(object):
 class GigSelect(Game):
     def __init__(self, screen, *args, **kw):
         Game.__init__(self, *args, **kw)
-        
-        self.img = pygame.image.load(os.path.join("data", "images", "doctor_yellow2.jpg"))
 
         self.re = Renderer ()
         self.re.screen = screen
@@ -112,7 +113,7 @@ class GigSelect(Game):
 
         # self.re.screen.fill ((234, 228, 223))
         
-        self.re.screen.blit(self.img, (0,0))
+        self.re.screen.blit(self.selection(), (0,0))
         self.re.refresh ()
 
         return rects
