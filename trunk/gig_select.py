@@ -74,6 +74,8 @@ class GigWidget(object):
 class GigSelect(Game):
     def __init__(self, screen, *args, **kw):
         Game.__init__(self, *args, **kw)
+        
+        self.img = pygame.image.load(os.path.join("data", "images", "doctor_yellow2.jpg"))
 
         self.re = Renderer ()
         self.re.screen = screen
@@ -107,7 +109,9 @@ class GigSelect(Game):
     def draw(self, screen):
         rects = Game.draw(self, screen)
 
-        self.re.screen.fill ((234, 228, 223))
+        # self.re.screen.fill ((234, 228, 223))
+        
+        self.re.screen.blit(self.img, (0,0))
         self.re.refresh ()
 
         return rects
