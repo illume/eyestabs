@@ -68,6 +68,8 @@ def create_file_font (fontfile, size, style=FONT_STYLE_NORMAL):
         __font_cache.clear ()
 
     if (fontfile, size, style) not in __font_cache:
+        if not fontfile:
+            fontfile = os.path.join("data", "freesansbold.ttf")
         retval = PygameFont.Font (fontfile, size)
         __font_cache[(fontfile, size, style)] = retval
         apply_font_style (retval, style)
