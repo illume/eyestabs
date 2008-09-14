@@ -30,6 +30,8 @@ class Intro(Game):
 
         self.first_text = 1
 
+        self.done_load_music = 0
+
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -67,13 +69,13 @@ class Intro(Game):
             self.draw_lines = 0
 
 
-            pygame.mixer.music.load(os.path.join("data","music","opener.ogg"))
-            pygame.mixer.music.play()
+            if not self.done_load_music:
+                self.loop_ogg.fadeout(100)
 
-            self.loop_ogg.fadeout(100)
+                pygame.mixer.music.load(os.path.join("data","music","opener.ogg"))
+                pygame.mixer.music.play()
 
-
-
+                self.done_load_music = 1
 
 
 
