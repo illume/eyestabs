@@ -249,13 +249,19 @@ def main():
 
 
     # start playing intro track, before the screen comes up.
-    if 0:
-        try:
+    if 1:
+        if 1:
             intro_track = os.path.join("data", "intro.ogg")
-            pygame.mixer.music.load(intro_track)
-            pygame.mixer.music.play(-1)
-        except:
-            print "failed playing music track: '%s'" % intro_track
+            intro_sound_big = pygame.mixer.Sound(open(intro_track, "rb"))
+            intro_sound_big.play(-1)
+        else:
+            try:
+                intro_track = os.path.join("data", "intro.ogg")
+                pygame.mixer.music.load(intro_track)
+                pygame.mixer.music.play(-1)
+            except:
+                print "failed playing music track: '%s'" % intro_track
+
 
     else:
         
