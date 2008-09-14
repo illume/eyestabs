@@ -221,7 +221,7 @@ def main():
             return array
         
         intro_track = os.path.join("data", "intro.ogg")
-        intro_sound = pygame.mixer.Sound(intro_track)
+        intro_sound = pygame.mixer.Sound(open(intro_track, "rb"))
         
         
         intro_array = _array_samples(intro_sound, 1)[:705600/2]
@@ -309,6 +309,10 @@ def main():
         elapsed_time = clock.get_time()
         if elapsed_time:
             elapsed_time = elapsed_time / 1000.
+
+
+        # speed up time...
+        #elapsed_time *= 4
 
         events = pygame.fastevent.get()
 
