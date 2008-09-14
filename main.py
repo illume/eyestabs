@@ -295,7 +295,7 @@ def main():
 
     import urdpyg.sounds
     data.sounds = urdpyg.sounds.SoundManager()
-    data.sounds.Load(urdpyg.sounds.SOUND_LIST)
+    data.sounds.Load(urdpyg.sounds.SOUND_LIST, os.path.join("data", "sounds"))
 
 
 

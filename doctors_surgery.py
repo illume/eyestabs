@@ -172,12 +172,12 @@ class DoctorsSurgery(Game):
     def doit(self):
         radios = self.doctor_widget.radios
 
-        #data.sounds.Play("fx02laughter")
+        data.sounds.Play("fx02laughter")
         #data.sounds.Play("fx03hit1")
         #data.sounds.sounds["fx02laughter"].play()
         #print data.sounds.sounds["fx02laughter"].get_length()
-        pygame.mixer.music.load(os.path.join("data","sounds","fx02laughter.ogg"))
-        pygame.mixer.music.play()
+        #pygame.mixer.music.load(os.path.join("data","sounds","fx02laughter.ogg"))
+        #pygame.mixer.music.play()
 
 
         selection = [btn.text for btn in radios if btn.state == 2][0]
@@ -241,6 +241,7 @@ class DoctorsSurgery(Game):
         """
         print 'gig_select stopped'
         self.going = False
+        pygame.mixer.music.fadeout(100)
 
 
     def start(self):

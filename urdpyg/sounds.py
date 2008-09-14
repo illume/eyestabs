@@ -29,8 +29,8 @@ def get_sound_list(path = SOUND_PATH):
     """
     # load a list of sounds without path at the beginning and .ogg at the end.
     sound_list = map(lambda x:x[len(path)+1:-4], 
-		     #glob.glob(os.path.join(path,"*.ogg")) 
-		     glob.glob(os.path.join(path,"*.wav")) 
+		     glob.glob(os.path.join(path,"*.ogg")) 
+		     #glob.glob(os.path.join(path,"*.wav")) 
 		    )
 
     return sound_list
@@ -89,7 +89,7 @@ class SoundManager:
 	    if not sounds.has_key(name):
 		fullname = os.path.join(sound_path, name+'.ogg')
 		try: 
-		    sound = pygame.mixer.Sound(fullname)
+		    sound = pygame.mixer.Sound(open(fullname, "rb"))
 		except: 
 		    sound = None
 		    self._debug("Error loading sound", fullname)
