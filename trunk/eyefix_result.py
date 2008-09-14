@@ -33,7 +33,7 @@ class EyeFixResult(Game):
         """
         r = random.choice([(1, ["I fixed your eye!"]), 
                            (0, ["Oh noes!!!  I seem to have",  "just made the wound worse!"])])
-        self.text_string = r[1]
+        self.text_string = r[1] + ["    press enter..."]
 
     def handle_events(self, events):
         Game.handle_events(self, events)
@@ -41,10 +41,11 @@ class EyeFixResult(Game):
         for e in events:
             if e.type == KEYDOWN:
                 #if e.key == K_ESCAPE:
-                #    #self.stop()
+                #    self.stop()
+                #    break
                 #    pass
                 data.where_to = "gig_select"
-                self.stop()
+                #self.stop()
 
 
     def update(self, elapsed_time):
