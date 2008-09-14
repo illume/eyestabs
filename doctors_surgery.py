@@ -168,8 +168,17 @@ class DoctorsSurgery(Game):
 
 
 
+
     def doit(self):
         radios = self.doctor_widget.radios
+
+        #data.sounds.Play("fx02laughter")
+        #data.sounds.Play("fx03hit1")
+        #data.sounds.sounds["fx02laughter"].play()
+        #print data.sounds.sounds["fx02laughter"].get_length()
+        pygame.mixer.music.load(os.path.join("data","sounds","fx02laughter.ogg"))
+        pygame.mixer.music.play()
+
 
         selection = [btn.text for btn in radios if btn.state == 2][0]
 
@@ -208,6 +217,9 @@ class DoctorsSurgery(Game):
     def update(self, elapsed_time):
         Game.update(self, elapsed_time)
 
+        if not pygame.mixer.music.get_busy():
+            self.play_random_music()
+
     def draw(self, screen):
         rects = Game.draw(self, screen)
         self.re.screen = screen
@@ -239,7 +251,15 @@ class DoctorsSurgery(Game):
         self.changed = True
         self.re.refresh ()
         self.elapsed_time = 0.0
+        self.play_random_music()
 
+    def play_random_music(self):
+        import random
+        #fname = random.choice("loop01.ogg loop02.ogg loop03.ogg loop04doctor.ogg loop05.ogg loop06doctor2.ogg loop07.ogg loop08end.ogg opener.ogg".split())
+        fname = random.choice("loop01.ogg loop02.ogg loop03.ogg loop04doctor.ogg loop05.ogg loop06doctor2.ogg loop07.ogg loop08end.ogg".split())
+
+        pygame.mixer.music.load(os.path.join("data","music",fname))
+        pygame.mixer.music.play()
 
 
 ################################################################################

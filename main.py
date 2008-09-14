@@ -159,7 +159,7 @@ def main():
     #print data.load('sample.txt').read()
     
     #pygame.mixer.pre_init(44100,-16,2, 1024* 4)
-    #pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
+    pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
 
     pygame.init()
     pygame.fastevent.init()
@@ -291,6 +291,17 @@ def main():
     top.games.append(note_guess)
     top.note_guess = note_guess
     
+
+
+    import urdpyg.sounds
+    data.sounds = urdpyg.sounds.SoundManager()
+    data.sounds.Load(urdpyg.sounds.SOUND_LIST)
+
+
+
+
+
+
     clock = pygame.time.Clock()
     clock.tick()
     
@@ -313,7 +324,10 @@ def main():
         #   number of system calls (gettimeofday) to one per frame.
         top.update(elapsed_time)
         
-        
+        data.sounds.Update(elapsed_time)
+
+
+
         # the draw method retunrns a list of rects, 
         #   for where the screen needs to be updated.
         rects = top.draw(screen)
