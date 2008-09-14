@@ -70,7 +70,7 @@ class Intro(Game):
             pygame.mixer.music.load(os.path.join("data","music","opener.ogg"))
             pygame.mixer.music.play()
 
-            intro.loop_ogg.fadeout(100)
+            self.loop_ogg.fadeout(100)
 
 
 
