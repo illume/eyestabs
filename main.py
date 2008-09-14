@@ -343,7 +343,7 @@ def main():
 
         # if not empty, then update the display.
         if rects != []:
-            print rects
+            #print rects
             pygame.display.update(rects)
         #pygame.display.update(rects)
         
