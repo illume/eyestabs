@@ -2,10 +2,25 @@
 Game main module.
 """
 
+
+import analyse_thread
+import sys
+
+if "analyse_play.py" in sys.argv:
+    import analyse_play
+    analyse_play.main()
+    sys.exit(0)
+
+
 import os,sys
 import data
 import pygame
 from pygame.locals import *
+
+
+import numpy
+pygame.sndarray.use_arraytype("numpy")
+
 
 
 import constants
@@ -32,7 +47,6 @@ from eyefix_result import EyeFixResult
 
 from doctors_surgery import DoctorsSurgery
 
-import analyse_thread
 
 
 import player
@@ -142,6 +156,68 @@ class Top(Game):
 
 
 
+def _array_samples(sound, raw):
+    # Info is a (freq, format, stereo) tuple
+    info = pygame.mixer.get_init ()
+
+    print "XX 1"
+
+
+    if not info:
+        raise pygame.error, "Mixer not initialized"
+
+    print "XX 2"
+
+    fmtbytes = (abs (info[1]) & 0xff) >> 3
+
+    print "XX 3"
+
+    channels = info[2]
+    print "XX 3.1"
+
+    if raw:
+        print "XX 3.2"
+        data = sound.get_buffer ().raw
+
+    else:
+        print "XX 3.3"
+        data = sound.get_buffer ()
+
+    print "XX 4"
+
+
+    shape = (len (data) / (channels * fmtbytes), )
+    if channels > 1:
+        shape = (shape[0], 2)
+
+    print "XX 5"
+
+    # mixer.init () does not support different formats from the ones below,
+    # so MSB/LSB stuff is silently ignored.
+    typecode = { 8 : numpy.uint8,   # AUDIO_U8
+                 16 : numpy.uint16, # AUDIO_U16 / AUDIO_U16SYS
+                 -8 : numpy.int8,   # AUDIO_S8
+                 -16 : numpy.int16  # AUDUI_S16 / AUDIO_S16SYS
+                 }[info[1]]
+
+    print channels
+    print fmtbytes
+    print typecode
+    
+    array = numpy.fromstring (data, typecode)
+    print array.shape
+    print shape
+
+
+    print "XX 8"
+    
+    array.shape = shape
+    return array
+
+
+
+
+
 def main():
 
 
@@ -159,7 +235,7 @@ def main():
     #print data.load('sample.txt').read()
     
     #pygame.mixer.pre_init(44100,-16,2, 1024* 4)
-    pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
+    #pygame.mixer.pre_init(44100,-16,2, 1024* 4) 
 
     pygame.init()
     pygame.fastevent.init()
@@ -169,6 +245,8 @@ def main():
 
 
     analyse_thread.init()
+
+
 
     # start playing intro track, before the screen comes up.
     if 0:
@@ -180,63 +258,38 @@ def main():
             print "failed playing music track: '%s'" % intro_track
 
     else:
-        import numpy
-        pygame.sndarray.use_arraytype("numpy")
         
-        mixer = pygame.mixer
 
-        def _array_samples(sound, raw):
-            # Info is a (freq, format, stereo) tuple
-            info = mixer.get_init ()
-            if not info:
-                raise pygame.error, "Mixer not initialized"
-            fmtbytes = (abs (info[1]) & 0xff) >> 3
-            channels = info[2]
-            if raw:
-                data = sound.get_buffer ().raw
-            else:
-                data = sound.get_buffer ()
-        
-            shape = (len (data) / (channels * fmtbytes), )
-            if channels > 1:
-                shape = (shape[0], 2)
+        print "1 asdf"
 
-            # mixer.init () does not support different formats from the ones below,
-            # so MSB/LSB stuff is silently ignored.
-            typecode = { 8 : numpy.uint8,   # AUDIO_U8
-                         16 : numpy.uint16, # AUDIO_U16 / AUDIO_U16SYS
-                         -8 : numpy.int8,   # AUDIO_S8
-                         -16 : numpy.int16  # AUDUI_S16 / AUDIO_S16SYS
-                         }[info[1]]
-
-            print channels
-            print fmtbytes
-            print typecode
-            
-            array = numpy.fromstring (data, typecode)
-            print array.shape
-            print shape
-            
-            array.shape = shape
-            return array
         
         intro_track = os.path.join("data", "intro.ogg")
+        print "2 asdf"
+
         intro_sound = pygame.mixer.Sound(open(intro_track, "rb"))
         
+        print "3 asdf"
         
         intro_array = _array_samples(intro_sound, 1)[:705600/2]
 
+        print "4 asdf"
         
-
         # assert len(intro_array) == 705600
 
         for i in range(1):  # 4 x longer
             intro_array = numpy.append(intro_array, intro_array, 0)
 
+        print "5 asdf"
+
         intro_sound_big = pygame.sndarray.make_sound(intro_array)
+
+        print "6 asdf"
+
         
         pygame.time.set_timer(constants.INTRO_FADEOUT, 31000)
         intro_sound_big.play()
+
+        print "7 asdf"
         
 
     screen = pygame.display.set_mode(constants.SCREEN_SIZE)
