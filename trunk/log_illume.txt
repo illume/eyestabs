@@ -531,5 +531,20 @@ Looks like a windows 'open file in text mode bug'.
 
 
 
+2008/09/14 10:28:23 AEST GMT +10
 
+Put a little bit of music in, and a Sound, now that they work.
+
+- note guess updates...
+    - detect if the note played is in range
+    - show fails/passes on the screen
+    - update the Player class if you lose an eye
+
+
+
+2008/09/14 10:50:30 AEST GMT +10
+
+well, for some reason I don't want to work on the note guessing part so much...
+
+I feel like adding some story elements, and improving the intro some more.
 
