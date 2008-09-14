@@ -20,7 +20,7 @@ from pygame.locals import *
 
 
 
-SOUND_PATH = os.path.join("..", "data", "sounds")
+SOUND_PATH = os.path.join("data", "sounds")
 
 
 
@@ -29,7 +29,8 @@ def get_sound_list(path = SOUND_PATH):
     """
     # load a list of sounds without path at the beginning and .ogg at the end.
     sound_list = map(lambda x:x[len(path)+1:-4], 
-		     glob.glob(os.path.join(path,"*.ogg")) 
+		     #glob.glob(os.path.join(path,"*.ogg")) 
+		     glob.glob(os.path.join(path,"*.wav")) 
 		    )
 
     return sound_list
@@ -173,8 +174,8 @@ class SoundManager:
 
             elif self.chans[name]:
                 self.chans[name].set_volume(vol_l, vol_r)
-
-
+        else:
+            raise 'not found'
 
 
     def Update(self, elapsed_time):

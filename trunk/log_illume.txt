@@ -518,5 +518,11 @@ ok, you can go from the doctors surgery to various places now.
     - go to gig_results screen.
 
 
+2008/09/14 09:51:49 AEST GMT +10
+
+
+failed at putting in sounds... they don't seem to work.
+
+
 
 
