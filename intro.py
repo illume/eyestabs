@@ -63,6 +63,10 @@ class Intro(Game):
             self.first_text = 0
             self.draw_lines = 0
 
+            pygame.mixer.music.load(os.path.join("data","music","opener.ogg"))
+            pygame.mixer.music.play()
+
+
 
 
 
