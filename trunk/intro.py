@@ -126,8 +126,6 @@ class Intro(Game):
 
         if self.second_text:
 
-            intro_text = """<SCARY DARK SILLY VOICE OVER VOICE> In the dirty underground music scene often referred to as 'eye stabs', there are lethal gigs in select nightclubs around the world.  Musicians play for eyes. A tune is played to the musician, and they must figure out the notes played.        Fuck up the tune, and you are stabbed in the eye! Get the tune right, then fortune and respect are yours! Better than the riches and the adoration though -- rich club owners can give you spare eyes... and provide doctors that can give you back eyes you have had stabbed out.        So are you prepared to put your eyes on the line? Can you play well enough to avoid a stab in the eye? Do you trust the sleazy club owners doctors to fix your eye if it does get stabbed?        </SCARY DARK SILLY VOICE OVER VOICE>"""
-
             intro_text = """<SCARY DARK SILLY VOICE OVER VOICE>
 In the dirty underground music scene often referred to as 'eye stabs', there are lethal gigs in select nightclubs around the world.  Musicians play for eyes. A tune is played to the musician, and they must figure out the notes played.
 
@@ -137,15 +135,7 @@ So are you prepared to put your eyes on the line? Can you play well enough to av
 </SCARY DARK SILLY VOICE OVER VOICE>"""
 
             text_lines = textwrap.wrap_multi_line(intro_text, self.font2, 630)
-            if 0:
-                text_lines = textwrap.wrapline(intro_text, self.font2, 630)
-                new_lines = []
-                for l in text_lines:
-                    pass
-                    new_lines.extend( l.split("        ") )
 
-                text_lines = new_lines
-            
             screen.fill((237, 99, 127))
 
 
